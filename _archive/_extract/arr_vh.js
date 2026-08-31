@@ -1,0 +1,1 @@
+const vh = [{x:34,y:28,title:"Amethyst Cluster",text:"Used for centuries as a symbol of calm focus. We explore story, not medical claims."},{x:68,y:42,title:"Lavender Oil",text:"Bright, herbaceous. Learn how scent links to memory and ritual."},{x:48,y:75,title:"Palo & Raw Crystals",text:"Textures, origins, ethics — wellness education rooted in respect."}];

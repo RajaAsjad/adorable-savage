@@ -1,0 +1,18 @@
+/** Site images and content data */
+export const vf = "/images/20169846-pexels-photo-20169846.jpeg";
+export const Rr = "/images/7947796-pexels-photo-7947796.jpeg";
+export const Le = "/images/5046356-pexels-photo-5046356.jpeg";
+export const En = "/images/16934835-pexels-photo-16934835.jpeg";
+export const jn = "/images/4880405-pexels-photo-4880405.jpeg";
+export const Qu = "/images/36092411-pexels-photo-36092411.jpeg";
+export const gf = "/images/11435367-pexels-photo-11435367.jpeg";
+export const mh = "/images/6694177-pexels-photo-6694177.jpeg";
+export const _r = "/images/29072916-pexels-photo-29072916.jpeg";
+
+export const hh = [{id:"01",title:"VERSES & VIBES",sub:"Music • Expression • Connection",long:"Live sessions, storytelling, and sound that moves you. A culture platform for authentic voices.",color:"from-[#FF6B9D] to-[#FF8A3D]",accent:"#FF6B9D",img:Qu},{id:"02",title:"UNAPOLOGETIC WELLNESS",sub:"Wellness • Education • Self-Care",long:"Wellness on your own terms — workshops, resources, and rituals for mind-body joy.",color:"from-[#A78BFA] to-[#2DD4BF]",accent:"#A78BFA",img:Le},{id:"03",title:"OILS & CRYSTALS",sub:"Education • Energy • Exploration",long:"Curiosity-led learning about botanicals, energy, and natural self-care without the hype.",color:"from-[#FDE047] to-[#14B8A6]",accent:"#FACC15",img:Rr},{id:"04",title:"SOBRIETY INTERCONNECT",sub:"Sobriety • Community • Support",long:"Judgement-free community, honest conversations, and celebrations of clear, connected living.",color:"from-[#FB7185] to-[#F97316]",accent:"#FB7185",img:jn}];
+
+export const Mr = [{name:"Verses & Vibes",cat:"MUSIC & CULTURE",desc:"Open mics, artist spotlights, and soulful gatherings where every voice matters.",img:Qu,color:"bg-[#FF6B9D]"},{name:"Unapologetic Wellness",cat:"WELLNESS LAB",desc:"Workshops that reclaim wellness as joyful, accessible, and radically inclusive.",img:Le,color:"bg-[#A78BFA]"},{name:"Oils & Crystals",cat:"EDUCATION",desc:"Learn the stories, science, and sensory ritual of plants and minerals.",img:gf,color:"bg-[#FACC15]"},{name:"Sobriety Interconnect",cat:"COMMUNITY",desc:"Support circles, sober socials, and creative outlets for clear living.",img:jn,color:"bg-[#FB7185]"},{name:"Community Experiences",cat:"IRL MAGIC",desc:"Pop-ups, markets, retreats — real-life moments of weird, wonderful connection.",img:En,color:"bg-[#2DD4BF]"}];
+
+export const Ur = [{date:"NOV 14",day:"14",month:"NOV",title:"Verses & Vibes: Open Mic Night",loc:"Denver, CO • HQ Studio",cat:"MUSIC",desc:"Bring your words, your voice, your whole self. No gatekeeping.",color:"bg-[#FF6B9D]"},{date:"NOV 19",day:"19",month:"NOV",title:"Unapologetic Wellness Circle",loc:"Virtual • Zoom",cat:"WELLNESS",desc:"Breathwork, boundary-setting, and joy as practice.",color:"bg-[#A78BFA]"},{date:"NOV 24",day:"24",month:"NOV",title:"Oils & Crystals 101",loc:"Boulder, CO • The Nook",cat:"EDUCATION",desc:"Hands-on exploration of scent, stone, and intention.",color:"bg-[#FACC15]"},{date:"DEC 02",day:"02",month:"DEC",title:"Sobriety Social: Game Night",loc:"Denver, CO • Community Lab",cat:"SOBRIETY",desc:"Laughter is the best medicine, but we have snacks too.",color:"bg-[#FB7185]"},{date:"DEC 07",day:"07",month:"DEC",title:"Community Market",loc:"RiNo District • Denver",cat:"COMMUNITY",desc:"Artists, healers, makers — all savage, all adorable.",color:"bg-[#2DD4BF]"}];
+
+export const vh = [{x:34,y:28,title:"Amethyst Cluster",text:"Used for centuries as a symbol of calm focus. We explore story, not medical claims."},{x:68,y:42,title:"Lavender Oil",text:"Bright, herbaceous. Learn how scent links to memory and ritual."},{x:48,y:75,title:"Palo & Raw Crystals",text:"Textures, origins, ethics — wellness education rooted in respect."}];
