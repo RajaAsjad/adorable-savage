@@ -47,17 +47,19 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
+                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-black/40">
+                    Security
+                </div>
+                <h2 className="mt-2 font-display text-[32px] leading-none tracking-tight">
                     Update Password
                 </h2>
-
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-2 text-[14px] text-black/55">
                     Ensure your account is using a long, random password to stay
                     secure.
                 </p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
+            <form onSubmit={updatePassword} className="mt-8 space-y-6">
                 <div>
                     <InputLabel
                         htmlFor="current_password"
@@ -72,7 +74,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                             setData('current_password', e.target.value)
                         }
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-2 block w-full"
                         autoComplete="current-password"
                     />
 
@@ -91,7 +93,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-2 block w-full"
                         autoComplete="new-password"
                     />
 
@@ -111,7 +113,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                             setData('password_confirmation', e.target.value)
                         }
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-2 block w-full"
                         autoComplete="new-password"
                     />
 
@@ -122,7 +124,9 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>
+                        Save Password
+                    </PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -131,9 +135,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">
-                            Saved.
-                        </p>
+                        <p className="text-sm font-medium text-teal">Saved.</p>
                     </Transition>
                 </div>
             </form>

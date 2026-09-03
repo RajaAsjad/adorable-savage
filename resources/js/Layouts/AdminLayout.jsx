@@ -136,8 +136,26 @@ export default function AdminLayout({ title, children }) {
 
                 <div className="border-t border-white/10 p-4">
                     <div className="mb-3 rounded-2xl bg-white/5 px-4 py-3">
-                        <div className="text-sm font-semibold text-white">
-                            {auth.user.name}
+                        <div className="mb-3 flex items-center gap-3">
+                            {auth.user.profile_image ? (
+                                <img
+                                    src={auth.user.profile_image}
+                                    alt=""
+                                    className="h-10 w-10 rounded-full object-cover"
+                                />
+                            ) : (
+                                <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-[11px] font-bold text-ink">
+                                    {auth.user.name
+                                        ?.split(' ')
+                                        .map((part) => part[0])
+                                        .join('')
+                                        .slice(0, 2)
+                                        .toUpperCase() || 'AS'}
+                                </div>
+                            )}
+                            <div className="text-sm font-semibold text-white">
+                                {auth.user.name}
+                            </div>
                         </div>
                         <div className="text-[12px] text-white/50">
                             {auth.user.email}
