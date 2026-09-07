@@ -22,12 +22,29 @@ function NavItem({ href, active, children, icon }) {
 export default function AdminLayout({ title, children }) {
     const { auth, branding, flash } = usePage().props;
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [settingsOpen, setSettingsOpen] = useState(
-        route().current('admin.settings.*'),
+    const [programsOpen, setProgramsOpen] = useState(
+        route().current('admin.program-categories.*') ||
+            route().current('admin.program-posts.*'),
+    );
+    const [eventsOpen, setEventsOpen] = useState(
+        route().current('admin.event-categories.*') ||
+            route().current('admin.events.*'),
+    );
+    const [galleryOpen, setGalleryOpen] = useState(
+        route().current('admin.gallery-categories.*') ||
+            route().current('admin.galleries.*'),
     );
 
-    const brandingActive = route().current('admin.settings.branding');
-    const emailActive = route().current('admin.settings.email');
+    const programCategoriesActive = route().current(
+        'admin.program-categories.*',
+    );
+    const programPostsActive = route().current('admin.program-posts.*');
+    const eventCategoriesActive = route().current('admin.event-categories.*');
+    const eventsActive = route().current('admin.events.*');
+    const galleryCategoriesActive = route().current(
+        'admin.gallery-categories.*',
+    );
+    const galleriesActive = route().current('admin.galleries.*');
 
     return (
         <div className="min-h-screen bg-cream text-ink">
@@ -78,56 +95,190 @@ export default function AdminLayout({ title, children }) {
                         Dashboard
                     </NavItem>
 
+                    <NavItem
+                        href={route('admin.pages.index')}
+                        active={route().current('admin.pages.*')}
+                        icon="☰"
+                    >
+                        Pages
+                    </NavItem>
+
+                    <NavItem
+                        href={route('admin.about-posts.index')}
+                        active={route().current('admin.about-posts.*')}
+                        icon="◎"
+                    >
+                        About Posts
+                    </NavItem>
+
                     <div>
                         <button
                             type="button"
-                            onClick={() => setSettingsOpen((open) => !open)}
+                            onClick={() => setProgramsOpen((open) => !open)}
                             className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold tracking-wide transition ${
-                                route().current('admin.settings.*')
+                                programCategoriesActive || programPostsActive
                                     ? 'bg-white/10 text-white'
                                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                             }`}
                         >
                             <span className="flex items-center gap-3">
                                 <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-sm">
-                                    ✦
+                                    ▦
                                 </span>
-                                Site Settings
+                                Programs Management
                             </span>
                             <span
                                 className={`text-xs transition ${
-                                    settingsOpen ? 'rotate-180' : ''
+                                    programsOpen ? 'rotate-180' : ''
                                 }`}
                             >
                                 ▾
                             </span>
                         </button>
 
-                        {settingsOpen && (
+                        {programsOpen && (
                             <div className="mt-2 space-y-1 border-l border-white/10 ms-8 ps-3">
                                 <Link
-                                    href={route('admin.settings.branding')}
+                                    href={route('admin.program-categories.index')}
                                     className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
-                                        brandingActive
+                                        programCategoriesActive
                                             ? 'bg-blush text-white'
                                             : 'text-white/60 hover:bg-white/5 hover:text-white'
                                     }`}
                                 >
-                                    Branding
+                                    Program Category
                                 </Link>
                                 <Link
-                                    href={route('admin.settings.email')}
+                                    href={route('admin.program-posts.index')}
                                     className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
-                                        emailActive
+                                        programPostsActive
                                             ? 'bg-blush text-white'
                                             : 'text-white/60 hover:bg-white/5 hover:text-white'
                                     }`}
                                 >
-                                    Email Settings
+                                    Programs Post
                                 </Link>
                             </div>
                         )}
                     </div>
+
+                    <div>
+                        <button
+                            type="button"
+                            onClick={() => setEventsOpen((open) => !open)}
+                            className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold tracking-wide transition ${
+                                eventCategoriesActive || eventsActive
+                                    ? 'bg-white/10 text-white'
+                                    : 'text-white/70 hover:bg-white/5 hover:text-white'
+                            }`}
+                        >
+                            <span className="flex items-center gap-3">
+                                <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-sm">
+                                    ◷
+                                </span>
+                                Event Management
+                            </span>
+                            <span
+                                className={`text-xs transition ${
+                                    eventsOpen ? 'rotate-180' : ''
+                                }`}
+                            >
+                                ▾
+                            </span>
+                        </button>
+
+                        {eventsOpen && (
+                            <div className="mt-2 space-y-1 border-l border-white/10 ms-8 ps-3">
+                                <Link
+                                    href={route('admin.event-categories.index')}
+                                    className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
+                                        eventCategoriesActive
+                                            ? 'bg-blush text-white'
+                                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    }`}
+                                >
+                                    Event Category
+                                </Link>
+                                <Link
+                                    href={route('admin.events.index')}
+                                    className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
+                                        eventsActive
+                                            ? 'bg-blush text-white'
+                                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    }`}
+                                >
+                                    Events
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <button
+                            type="button"
+                            onClick={() => setGalleryOpen((open) => !open)}
+                            className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold tracking-wide transition ${
+                                galleryCategoriesActive || galleriesActive
+                                    ? 'bg-white/10 text-white'
+                                    : 'text-white/70 hover:bg-white/5 hover:text-white'
+                            }`}
+                        >
+                            <span className="flex items-center gap-3">
+                                <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-sm">
+                                    ▣
+                                </span>
+                                Gallery Management
+                            </span>
+                            <span
+                                className={`text-xs transition ${
+                                    galleryOpen ? 'rotate-180' : ''
+                                }`}
+                            >
+                                ▾
+                            </span>
+                        </button>
+
+                        {galleryOpen && (
+                            <div className="mt-2 space-y-1 border-l border-white/10 ms-8 ps-3">
+                                <Link
+                                    href={route('admin.gallery-categories.index')}
+                                    className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
+                                        galleryCategoriesActive
+                                            ? 'bg-blush text-white'
+                                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    }`}
+                                >
+                                    Gallery Category
+                                </Link>
+                                <Link
+                                    href={route('admin.galleries.index')}
+                                    className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
+                                        galleriesActive
+                                            ? 'bg-blush text-white'
+                                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    }`}
+                                >
+                                    Gallery
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
+                    <NavItem
+                        href={route('admin.settings.site')}
+                        active={route().current('admin.settings.site')}
+                        icon="✦"
+                    >
+                        Site Setting
+                    </NavItem>
+
+                    <NavItem
+                        href={route('admin.settings.email')}
+                        active={route().current('admin.settings.email')}
+                        icon="✉"
+                    >
+                        Email Settings
+                    </NavItem>
 
                     <NavItem href={route('home')} active={false} icon="↗">
                         View Website

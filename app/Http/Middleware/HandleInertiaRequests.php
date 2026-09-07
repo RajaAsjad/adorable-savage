@@ -28,7 +28,9 @@ class HandleInertiaRequests extends Middleware
             $branding = [
                 'site_title' => config('app.name', 'The Adorable Savage'),
                 'site_logo' => null,
+                'footer_logo' => null,
                 'site_favicon' => null,
+                'copyright' => '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO',
             ];
         }
 

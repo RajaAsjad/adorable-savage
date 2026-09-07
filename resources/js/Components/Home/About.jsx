@@ -1,34 +1,115 @@
 import { aboutPillars } from '@/data';
 
-export default function About() {
+const defaultIntro =
+    "We're Adorably Savage: a place where healing, honesty, and resilience come together, no matter what you're walking through. Real. Raw. Relatable. We believe self-love and self-empowerment aren't one size fits all. That's why we built three spaces, each meeting you exactly where you are:";
+
+function stripHtml(html) {
+    if (!html) {
+        return '';
+    }
+
+    return html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function resolveIntro(description) {
+    if (!description || !stripHtml(description)) {
+        return defaultIntro;
+    }
+
+    const paragraphs = [...description.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+        .map((match) => stripHtml(match[1]))
+        .filter(Boolean);
+
+    if (paragraphs.length === 0) {
+        return stripHtml(description);
+    }
+
+    const intro = paragraphs.find(
+        (text) =>
+            text.length > 40 &&
+            !text.includes('WHAT WE DO') &&
+            !/^—/.test(text),
+    );
+
+    return intro || paragraphs[paragraphs.length - 1] || defaultIntro;
+}
+
+function TitleText({ title }) {
+    const text = title || 'About The Adorable Savage';
+
+    if (!text.includes('Adorable Savage')) {
+        return text;
+    }
+
+    const parts = text.split(/(Adorable Savage)/g);
+
+    return parts.map((part, index) =>
+        part === 'Adorable Savage' ? (
+            <em key={index}>{part}</em>
+        ) : (
+            <span key={index}>{part}</span>
+        ),
+    );
+}
+
+function getCustomField(page, name, defaultValue = '') {
+    if (!Array.isArray(page?.custom_fields)) {
+        return defaultValue;
+    }
+
+    const field = page.custom_fields.find(
+        (item) => (item?.name || '').trim() === name,
+    );
+
+    return field?.value ?? defaultValue;
+}
+
+function resolvePillars(aboutPosts) {
+    if (Array.isArray(aboutPosts) && aboutPosts.length > 0) {
+        return aboutPosts.map((post, index) => {
+            const fallback = aboutPillars[index] || aboutPillars[0];
+
+            return {
+                id: String(index + 1).padStart(2, '0'),
+                title: post.title,
+                sub: post.slogan_text || '',
+                long: stripHtml(post.description) || fallback.long,
+                img: post.image_url || fallback.img,
+                color: fallback.color,
+            };
+        });
+    }
+
+    return aboutPillars;
+}
+
+export default function About({ page = null, aboutPosts = [] }) {
+    const slogan = getCustomField(page, 'title slogan');
+    const title = page?.title
+        ? [page.title, slogan].filter(Boolean).join(' ').trim()
+        : 'About The Adorable Savage';
+    const intro = resolveIntro(page?.description);
+    const pillars = resolvePillars(aboutPosts);
+
     return (
         <section
             id="about"
             className="relative mx-auto max-w-[1280px] px-6 py-20 lg:py-28"
         >
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
-                <div>
-                    <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
-                        — WHAT WE DO
-                    </div>
-                    <h2 className="font-display text-[48px] leading-[0.9] tracking-[-0.03em] lg:text-[68px]">
-                    About The{' '}
-                        <span className="font-hand text-[1.1em] text-[#FF6B9D]">
-                        Adorable Savage
-                        </span>
-                    </h2>
-                </div>
-                <p className="max-w-[480px] text-[16px] leading-[1.6] text-black/60">
-                    We're Adorably Savage: a place where healing, honesty, and
-                    resilience come together, no matter what you're walking through.
-                    Real. Raw. Relatable. We believe self-love and self-empowerment
-                    aren't one size fits all. That's why we built three spaces, each
-                    meeting you exactly where you are:
-                </p>
+            <div className="about-copy mb-12">
+                <p>— WHAT WE DO</p>
+                <h2>
+                    <TitleText title={title} />
+                </h2>
+                <p>{intro}</p>
             </div>
 
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-                {aboutPillars.map((pillar) => (
+                {pillars.map((pillar) => (
                     <div
                         key={pillar.id}
                         className={`group relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-to-br p-6 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.35)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-16px_rgba(0,0,0,0.35)] ${pillar.color}`}
@@ -80,9 +161,7 @@ export default function About() {
             </div>
 
             <p className="mx-auto mt-12 max-w-[720px] text-center text-[17px] leading-[1.6] text-black/60">
-                Whatever brought you here, you're welcome exactly as you are. We're
-                not here to apologize for who we are. We're here to be savage, soft,
-                and unstoppable — together.
+            {getCustomField(page, 'Short Description')}
             </p>
         </section>
     );

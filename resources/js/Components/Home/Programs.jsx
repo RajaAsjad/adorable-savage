@@ -1,8 +1,79 @@
 import { useRef } from 'react';
 import { programs } from '@/data';
 
-export default function Programs() {
+function stripHtml(html) {
+    if (!html) {
+        return '';
+    }
+
+    return html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function ProgramsTitle({ title }) {
+    const text = title || 'UNFILTERED WELLNESS AND ADORABLY HUMAN';
+
+    if (!/WELLNESS AND/i.test(text)) {
+        return text;
+    }
+
+    const parts = text.split(/(WELLNESS AND)/i);
+
+    return parts.map((part, index) =>
+        /^WELLNESS AND$/i.test(part) ? (
+            <span
+                key={index}
+                className="font-hand text-[1.15em] text-[#A78BFA]"
+            >
+                {part}
+            </span>
+        ) : (
+            <span key={index}>{part}</span>
+        ),
+    );
+}
+
+function getCustomField(page, name, defaultValue = '') {
+    if (!Array.isArray(page?.custom_fields)) {
+        return defaultValue;
+    }
+
+    const field = page.custom_fields.find(
+        (item) => (item?.name || '').trim() === name,
+    );
+
+    return field?.value ?? defaultValue;
+}
+
+function resolvePrograms(programPosts) {
+    if (Array.isArray(programPosts) && programPosts.length > 0) {
+        return programPosts.map((post, index) => {
+            const fallback = programs[index] || programs[0];
+
+            return {
+                name: post.title,
+                cat: post.category_title || fallback.cat,
+                desc: stripHtml(post.description) || fallback.desc,
+                img: post.image_url || fallback.img,
+                color: fallback.color,
+            };
+        });
+    }
+
+    return programs;
+}
+
+export default function Programs({ page = null, programPosts = [] }) {
     const scroller = useRef(null);
+    const title =
+        stripHtml(getCustomField(page, 'title slogan')) ||
+        page?.title ||
+        'UNFILTERED WELLNESS AND ADORABLY HUMAN';
+    const intro = stripHtml(page?.description);
+    const items = resolvePrograms(programPosts);
 
     const scrollBy = (direction) => {
         if (!scroller.current) {
@@ -25,13 +96,10 @@ export default function Programs() {
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
                         — PROGRAMS
                     </div>
-                    <h2 className="font-display text-[40px] leading-[0.9] tracking-tight lg:text-[58px] max-w-[700px]">
-                    UNFILTERED{' '}
-                        <span className="font-hand text-[1.15em] text-[#A78BFA]">
-                        WELLNESS AND 
-                        </span>{' '}
-                        ADORABLY HUMAN
+                    <h2 className="font-display max-w-[700px] text-[40px] leading-[0.9] tracking-tight lg:text-[58px]">
+                        <ProgramsTitle title={title} />
                     </h2>
+                    {intro ? <p className="mt-4 max-w-[640px] text-[15px] leading-[1.6] text-black/60">{intro}</p> : null}
                 </div>
                 <div className="flex gap-2">
                     <button
@@ -55,7 +123,7 @@ export default function Programs() {
                 ref={scroller}
                 className="no-scrollbar flex snap-x gap-5 overflow-x-auto scroll-smooth pb-6"
             >
-                {programs.map((program) => (
+                {items.map((program) => (
                     <div
                         key={program.name}
                         className="group max-w-[340px] min-w-[320px] snap-start overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(0,0,0,0.3)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-18px_rgba(0,0,0,0.3)]"

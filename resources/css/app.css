@@ -90,6 +90,21 @@ html {
     scrollbar-width: none;
 }
 
+.note-editor.note-frame,
+.note-editor.note-airframe {
+    border: 0;
+    background: transparent;
+}
+
+.note-editor .note-toolbar {
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.note-editor .note-editing-area .note-editable {
+    background: #fffbf0;
+}
+
 .wave-bar {
     animation: wave 0.9s ease-in-out infinite;
 }
@@ -97,4 +112,205 @@ html {
 @keyframes wave {
     0%, 100% { height: 12px; }
     50% { height: 36px; }
+}
+
+/* Home hero — full left column from page editor HTML */
+.hero-copy {
+    color: #131313;
+}
+
+.hero-copy > p:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 2rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.hero-copy > p:first-child::before {
+    content: "";
+    display: inline-block;
+    height: 0.5rem;
+    width: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: #ff6b9d;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.hero-copy > p:first-child strong {
+    font-weight: 500;
+}
+
+.hero-copy > h1,
+.hero-copy > h2,
+.hero-copy > h3 {
+    margin: 0;
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(3.5rem, 12vw, 6.75rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+}
+
+.hero-copy > h1 + h1,
+.hero-copy > h2 + h2,
+.hero-copy > h1 + h2,
+.hero-copy > h2 + h1,
+.hero-copy > h2 + h3,
+.hero-copy > h3 + h2 {
+    margin-top: 0.05em;
+}
+
+.hero-copy > h1 em,
+.hero-copy > h2 em,
+.hero-copy > h3 em,
+.hero-copy > h1 i,
+.hero-copy > h2 i,
+.hero-copy > h3 i {
+    display: inline-block;
+    font-family: Caveat, cursive;
+    font-style: normal;
+    font-size: 1.15em;
+    color: #ff6b9d;
+    transform: translateY(0.15rem) rotate(-2deg);
+    background-image: linear-gradient(
+        transparent 55%,
+        rgba(253, 224, 71, 0.65) 55%,
+        rgba(253, 224, 71, 0.65) 78%,
+        transparent 78%
+    );
+}
+
+.hero-copy > p:not(:first-child):not(:has(a)) {
+    margin: 2rem 0 0;
+    max-width: 460px;
+    font-size: 17px;
+    font-weight: 450;
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.hero-copy > p:has(a) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2.5rem 0 0;
+}
+
+.hero-copy > p:has(a) a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.85rem 1.75rem;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.hero-copy > p:has(a) a:first-of-type {
+    background: #131313;
+    color: #fff;
+}
+
+.hero-copy > p:has(a) a:first-of-type:hover {
+    background: #ff6b9d;
+}
+
+.hero-copy > p:has(a) a:not(:first-of-type) {
+    border: 1px solid #131313;
+    background: transparent;
+    color: #131313;
+}
+
+.hero-copy > p:has(a) a:not(:first-of-type):hover {
+    background: #131313;
+    color: #fff;
+}
+
+.hero-copy a {
+    color: inherit;
+}
+
+/* About Us section header — from page editor */
+.about-copy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    color: #131313;
+}
+
+.about-copy > p:first-child {
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0 0 1rem;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+}
+
+.about-copy > p:only-child {
+    flex: 1 1 480px;
+    max-width: 480px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.6;
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.about-copy > h1,
+.about-copy > h2,
+.about-copy > h3 {
+    margin: 0;
+    max-width: 100%;
+    font-family: "Instrument Serif", serif;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+}
+
+@media (min-width: 1024px) {
+    .about-copy > h1,
+    .about-copy > h2,
+    .about-copy > h3 {
+        font-size: 68px;
+    }
+}
+
+.about-copy > h1 em,
+.about-copy > h2 em,
+.about-copy > h3 em,
+.about-copy > h1 i,
+.about-copy > h2 i,
+.about-copy > h3 i {
+    font-family: Caveat, cursive;
+    font-style: normal;
+    font-size: 1.1em;
+    color: #ff6b9d;
+}
+
+.about-copy > p:not(:first-child) {
+    margin: 0;
+    max-width: 480px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.6);
 }

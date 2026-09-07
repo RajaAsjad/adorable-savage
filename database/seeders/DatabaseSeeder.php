@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Setting::setMany([
             'site_title' => 'The Adorable Savage',
             'site_logo' => null,
+            'footer_logo' => null,
             'site_favicon' => null,
+            'copyright' => '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO',
         ], 'branding');
 
         \App\Models\Setting::setMany([
@@ -41,5 +43,14 @@ class DatabaseSeeder extends Seeder
             'mail_from_address' => '',
             'mail_from_name' => 'The Adorable Savage',
         ], 'mail');
+
+        $this->call(PageSeeder::class);
+        $this->call(AboutPostSeeder::class);
+        $this->call(ProgramCategorySeeder::class);
+        $this->call(ProgramPostSeeder::class);
+        $this->call(EventCategorySeeder::class);
+        $this->call(EventSeeder::class);
+        $this->call(GalleryCategorySeeder::class);
+        $this->call(GallerySeeder::class);
     }
 }

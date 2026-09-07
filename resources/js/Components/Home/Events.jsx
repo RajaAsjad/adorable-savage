@@ -1,10 +1,100 @@
 import { useState } from 'react';
 import { eventFilters, events } from '@/data';
 
-export default function Events() {
+function stripHtml(html) {
+    if (!html) {
+        return '';
+    }
+
+    return html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function EventsTitle({ title }) {
+    const text = title || 'COME FIND US IRL';
+
+    if (!/\bUS\b/.test(text)) {
+        return text;
+    }
+
+    const parts = text.split(/(\bUS\b)/);
+
+    return parts.map((part, index) =>
+        part === 'US' ? (
+            <span key={index} className="font-hand text-[#FF6B9D]">
+                {part}
+            </span>
+        ) : (
+            <span key={index}>{part}</span>
+        ),
+    );
+}
+
+function getCustomField(page, name, defaultValue = '') {
+    if (!Array.isArray(page?.custom_fields)) {
+        return defaultValue;
+    }
+
+    const field = page.custom_fields.find(
+        (item) => (item?.name || '').trim() === name,
+    );
+
+    return field?.value ?? defaultValue;
+}
+
+function resolveFilters(eventCategories) {
+    if (Array.isArray(eventCategories) && eventCategories.length > 0) {
+        return ['ALL', ...eventCategories];
+    }
+
+    return eventFilters;
+}
+
+function resolveEvents(eventsList) {
+    if (Array.isArray(eventsList) && eventsList.length > 0) {
+        return eventsList.map((event, index) => {
+            const fallback = events[index] || events[0];
+
+            return {
+                title: event.title,
+                cat: event.category_title || fallback.cat,
+                loc: fallback.loc,
+                desc: stripHtml(event.description) || fallback.desc,
+                day: event.day || fallback.day,
+                month: event.month
+                    ? String(event.month).toUpperCase()
+                    : fallback.month,
+                color: fallback.color,
+            };
+        });
+    }
+
+    return events;
+}
+
+export default function Events({
+    page = null,
+    eventCategories = [],
+    eventsList = [],
+}) {
     const [filter, setFilter] = useState('ALL');
+    const filters = resolveFilters(eventCategories);
+    const items = resolveEvents(eventsList);
     const visible =
-        filter === 'ALL' ? events : events.filter((event) => event.cat === filter);
+        filter === 'ALL'
+            ? items
+            : items.filter((event) => event.cat === filter);
+
+    const title =
+        stripHtml(getCustomField(page, 'title slogan')) ||
+        page?.title ||
+        'COME FIND US IRL';
+    const intro =
+        stripHtml(page?.description) ||
+        "See where The Adorable Savage is showing up next — from community gatherings and wellness experiences to music and special events.";
 
     return (
         <section
@@ -17,13 +107,10 @@ export default function Events() {
                         — WHERE WE'LL BE
                     </div>
                     <h2 className="font-display text-[56px] leading-[0.9] tracking-tight lg:text-[72px]">
-                        COME FIND{' '}
-                        <span className="font-hand text-[#FF6B9D]">US</span> IRL
+                        <EventsTitle title={title} />
                     </h2>
                     <p className="mt-4 max-w-[520px] leading-[1.6] text-black/60">
-                        See where The Adorable Savage is showing up next — from
-                        community gatherings and wellness experiences to music and
-                        special events.
+                        {intro}
                     </p>
                 </div>
                 <a
@@ -35,7 +122,7 @@ export default function Events() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
-                {eventFilters.map((item) => (
+                {filters.map((item) => (
                     <button
                         key={item}
                         type="button"

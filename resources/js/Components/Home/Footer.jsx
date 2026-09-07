@@ -1,9 +1,16 @@
 import { programs, sectionHref } from '@/data';
+import { usePage } from '@inertiajs/react';
 
 const exploreLinks = ['Home', 'About', 'Programs', 'Events'];
 const socialLinks = ['Instagram', 'YouTube', 'Facebook', 'TikTok'];
 
 export default function Footer() {
+    const { branding } = usePage().props;
+    const footerLogo = branding?.footer_logo || branding?.site_logo;
+    const copyright =
+        branding?.copyright ||
+        '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO';
+
     return (
         <footer className="relative mt-8 overflow-hidden rounded-t-[36px] bg-[#0A0A0A] px-6 pb-8 pt-16 text-white/70">
             <div className="pointer-events-none absolute -bottom-[10%] left-0 right-0 z-0 select-none text-center font-display text-[22vw] leading-none tracking-[-0.06em] text-white/[0.03]">
@@ -16,9 +23,17 @@ export default function Footer() {
                 <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr_1.2fr]">
                     <div>
                         <div className="flex items-center gap-2 text-white">
-                            <div className="grid h-9 w-9 place-items-center rounded-full bg-white text-[13px] font-bold text-black">
-                                AS
-                            </div>
+                            {footerLogo ? (
+                                <img
+                                    src={footerLogo}
+                                    alt=""
+                                    className="h-9 w-9 rounded-full object-cover"
+                                />
+                            ) : (
+                                <div className="grid h-9 w-9 place-items-center rounded-full bg-white text-[13px] font-bold text-black">
+                                    AS
+                                </div>
+                            )}
                             <span className="font-display text-[22px]">
                                 The Adorable{' '}
                                 <span className="font-hand text-[26px] text-[#FF6B9D]">
@@ -129,10 +144,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-14 flex flex-wrap justify-between gap-4 border-t border-white/10 pt-6 text-[12px]">
-                    <div className="opacity-50">
-                        © 2026 The Adorable Savage Organization • Made with joy in
-                        Denver, CO
-                    </div>
+                    <div className="opacity-50">{copyright}</div>
                     <div className="flex gap-6 opacity-50">
                         <a href="#" className="hover:opacity-100">
                             Privacy

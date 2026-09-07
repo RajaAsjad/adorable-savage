@@ -58,7 +58,12 @@ class Setting extends Model
         return [
             'site_title' => static::getValue('site_title', config('app.name', 'The Adorable Savage')),
             'site_logo' => static::getValue('site_logo'),
+            'footer_logo' => static::getValue('footer_logo'),
             'site_favicon' => static::getValue('site_favicon'),
+            'copyright' => static::getValue(
+                'copyright',
+                '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO'
+            ),
         ];
     }
 

@@ -1,8 +1,31 @@
 import { images } from '@/data';
 
-const avatars = [images.joy, images.folk, images.community];
+export const defaultHeroLeftHtml = `
+<p><strong>WELLNESS • EXPRESSION • CONNECTION • JOY</strong></p>
+<h2>FIND YOUR</h2>
+<h2><em>Adorable</em></h2>
+<h2>SAVAGE — WITHIN.</h2>
+<p>Welcome to The Adorable Savage — a culture of wellness, music, and community.</p>
+<p><a href="#programs">EXPLORE OUR PROGRAMS</a> <a href="#philosophy">FIND YOUR SAVAGE</a></p>
+`;
 
-export default function Hero({ playing }) {
+function hasContent(html) {
+    if (!html) {
+        return false;
+    }
+
+    return html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').trim().length > 0;
+}
+
+export default function Hero({ playing, page = null }) {
+    const leftHtml = hasContent(page?.description)
+        ? page.description
+        : defaultHeroLeftHtml;
+    const heroImage = page?.image || images.hero;
+    const avatars = page?.image
+        ? [page.image]
+        : [images.joy, images.folk, images.community];
+
     return (
         <section
             id="home"
@@ -10,55 +33,10 @@ export default function Hero({ playing }) {
         >
             <div className="mx-auto grid max-w-[1280px] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-0">
                 <div className="relative z-10 lg:pr-12">
-                    <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-medium tracking-[0.18em] shadow-sm">
-                        <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF6B9D]" />
-                        WELLNESS • EXPRESSION • CONNECTION • JOY
-                    </div>
-
-                    <h1 className="font-display text-[14vw] leading-[0.85] tracking-[-0.04em] lg:text-[108px] xl:text-[118px]">
-                        <span className="block">FIND YOUR</span>
-                        <span className="relative block">
-                            <span className="font-hand inline-block translate-y-1 rotate-[-2deg] text-[1.15em] text-[#FF6B9D]">
-                                Adorable
-                            </span>
-                            <span className="absolute left-[-10px] right-0 top-[55%] -z-10 h-[18px] -rotate-1 bg-[#FDE047]/60" />
-                        </span>
-                        <span className="flex items-center gap-4">
-                            SAVAGE
-                            <span className="mt-6 hidden h-[2px] w-[84px] bg-black lg:inline-flex" />
-                            <span className="hidden -translate-y-2 font-display font-sans text-[18px] leading-none tracking-[0.2em] lg:block">
-                                WITHIN.
-                            </span>
-                        </span>
-                        <span className="mt-3 block font-sans text-[22px] font-bold tracking-[0.28em] lg:hidden">
-                            WITHIN.
-                        </span>
-                    </h1>
-
-                    <p className="mt-8 max-w-[460px] text-[17px] font-[450] leading-[1.55] text-black/70">
-                        We inspire joy, wellness, self-expression, sobriety, and
-                        authentic living for all. A nonprofit that feels like your
-                        favorite community.
-                    </p>
-
-                    <div className="mt-10 flex flex-wrap gap-4">
-                        <a
-                            href="#programs"
-                            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#131313] py-2 pl-7 pr-2 text-[13px] font-bold tracking-wide text-white"
-                        >
-                            <span className="relative z-10">EXPLORE OUR PROGRAMS</span>
-                            <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-white text-black transition-transform group-hover:rotate-45">
-                                ↗
-                            </span>
-                            <span className="absolute inset-0 translate-y-full bg-[#FF6B9D] transition-transform duration-500 group-hover:translate-y-0" />
-                        </a>
-                        <a
-                            href="#philosophy"
-                            className="inline-flex items-center gap-2 rounded-full border border-black px-7 py-3 text-[13px] font-bold tracking-wide transition hover:bg-black hover:text-white"
-                        >
-                            FIND YOUR SAVAGE <span className="text-[16px]">↗</span>
-                        </a>
-                    </div>
+                    <div
+                        className="hero-copy"
+                        dangerouslySetInnerHTML={{ __html: leftHtml }}
+                    />
 
                     <div className="mt-12 flex items-center gap-6">
                         <div className="flex -space-x-3">
@@ -102,8 +80,8 @@ export default function Hero({ playing }) {
 
                     <div className="relative aspect-[4/5] w-[86%] rotate-[-1.5deg] overflow-hidden rounded-[2.8rem] border-[8px] border-white bg-[#E9E5DE] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)] lg:w-[84%]">
                         <img
-                            src={images.hero}
-                            alt="Joyful authentic expression"
+                            src={heroImage}
+                            alt={page?.title || 'Joyful authentic expression'}
                             className="h-full w-full object-cover"
                         />
                         <div className="absolute inset-0 rounded-[2.2rem] ring-[1px] ring-inset ring-black/10" />
