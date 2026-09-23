@@ -14,7 +14,7 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
                         : 'bg-transparent'
                 }`}
             >
-                <a href="#home" className="flex items-center gap-3">
+                <a href="/" className="flex items-center gap-3">
                     <div className="grid h-9 w-9 place-items-center rounded-full bg-[#131313] text-[13px] font-bold text-[#FFFBF0]">
                         AS
                     </div>
@@ -27,13 +27,13 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
                 </a>
 
                 <nav className="hidden items-center gap-5 text-[13px] font-medium tracking-[0.08em] xl:gap-8 lg:flex">
-                    {navLinks.map((label) => (
+                    {navLinks.map((link) => (
                         <a
-                            key={label}
-                            href={sectionHref(label)}
+                            key={link.label}
+                            href={sectionHref(link)}
                             className="group relative py-1"
                         >
-                            <span className="relative z-10">{label.toUpperCase()}</span>
+                            <span className="relative z-10">{link.label.toUpperCase()}</span>
                             <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6B9D] transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))}
@@ -41,7 +41,7 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
 
                 <div className="flex items-center gap-3">
                     <a
-                        href="#donate"
+                        href="/#donate"
                         className="group relative hidden overflow-hidden rounded-full bg-[#131313] px-7 py-[11px] text-[13px] font-bold tracking-wide text-white md:inline-flex"
                     >
                         <span className="relative z-10 flex items-center gap-2">
@@ -67,18 +67,18 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
             {menuOpen && (
                 <div className="mx-6 mt-3 rounded-[24px] border border-black/5 bg-white p-6 shadow-xl lg:hidden">
                     <nav className="flex flex-col gap-4 text-sm font-medium">
-                        {navLinks.map((label) => (
+                        {navLinks.map((link) => (
                             <a
-                                key={label}
-                                href={sectionHref(label)}
+                                key={link.label}
+                                href={sectionHref(link)}
                                 onClick={() => setMenuOpen(false)}
                                 className="border-b border-black/5 py-2 last:border-0"
                             >
-                                {label.toUpperCase()}
+                                {link.label.toUpperCase()}
                             </a>
                         ))}
                         <a
-                            href="#donate"
+                            href="/#donate"
                             className="mt-2 rounded-full bg-[#131313] px-6 py-3 text-center font-bold text-white"
                         >
                             DONATE

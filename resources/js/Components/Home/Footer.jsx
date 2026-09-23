@@ -1,7 +1,12 @@
 import { programs, sectionHref } from '@/data';
 import { usePage } from '@inertiajs/react';
 
-const exploreLinks = ['Home', 'About', 'Programs', 'Events'];
+const exploreLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/the-adorable-savage' },
+    { label: 'Our Pillars', href: '/#programs' },
+    { label: 'Events', href: '/#events' },
+];
 const socialLinks = ['Instagram', 'YouTube', 'Facebook', 'TikTok'];
 
 export default function Footer() {
@@ -62,13 +67,13 @@ export default function Footer() {
                             EXPLORE
                         </div>
                         <div className="space-y-2 text-[14px]">
-                            {exploreLinks.map((label) => (
+                            {exploreLinks.map((link) => (
                                 <a
-                                    key={label}
-                                    href={sectionHref(label)}
+                                    key={link.label}
+                                    href={sectionHref(link)}
                                     className="block transition hover:text-white"
                                 >
-                                    {label}
+                                    {link.label}
                                 </a>
                             ))}
                         </div>
@@ -82,7 +87,7 @@ export default function Footer() {
                             {programs.slice(0, 4).map((program) => (
                                 <a
                                     key={program.name}
-                                    href="#programs"
+                                    href="/#programs"
                                     className="block transition hover:text-white"
                                 >
                                     {program.name}

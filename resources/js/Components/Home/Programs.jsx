@@ -94,7 +94,7 @@ export default function Programs({ page = null, programPosts = [] }) {
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
                 <div>
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
-                        — PROGRAMS
+                        — OUR PILLARS
                     </div>
                     <h2 className="font-display max-w-[700px] text-[40px] leading-[0.9] tracking-tight lg:text-[58px]">
                         <ProgramsTitle title={title} />

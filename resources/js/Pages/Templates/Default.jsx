@@ -1,33 +1,38 @@
-import { Head, Link } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
+import { Head } from '@inertiajs/react';
+import Footer from '@/Components/Home/Footer';
+import Header from '@/Components/Home/Header';
 
 export default function Default({ page }) {
+    const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        window.addEventListener('scroll', onScroll);
+
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
     const title = page?.seo_title || page?.title || 'Page';
 
     return (
-        <div className="min-h-screen bg-cream text-ink">
+        <div className="relative min-h-screen overflow-x-hidden bg-[#FFFBF0] text-[#131313] selection:bg-[#FF6B9D] selection:text-white">
             <Head>
                 <title>{title}</title>
                 {page?.seo_description && (
                     <meta name="description" content={page.seo_description} />
                 )}
             </Head>
+            <div className="page-grain" />
 
-            <header className="border-b border-black/5 bg-white/70 backdrop-blur">
-                <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
-                    <Link href={route('home')} className="font-display text-[24px] tracking-tight">
-                        The Adorable{' '}
-                        <span className="font-hand text-[28px] text-blush">Savage</span>
-                    </Link>
-                    <Link
-                        href={route('home')}
-                        className="rounded-full border border-black/10 bg-white px-4 py-2 text-[12px] font-bold uppercase tracking-wide"
-                    >
-                        Home
-                    </Link>
-                </div>
-            </header>
+            <Header
+                scrolled={scrolled}
+                menuOpen={menuOpen}
+                setMenuOpen={setMenuOpen}
+            />
 
-            <main className="mx-auto max-w-4xl px-6 py-12">
+            <main className="mx-auto max-w-4xl px-6 pb-16 pt-32">
                 {page?.image && (
                     <img
                         src={page.image}
@@ -37,7 +42,7 @@ export default function Default({ page }) {
                 )}
 
                 <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-black/40">
-                    Page
+                    {page?.slug || 'page'}
                 </div>
                 <h1 className="mt-3 font-display text-[48px] leading-none tracking-tight">
                     {page?.title}
@@ -54,6 +59,8 @@ export default function Default({ page }) {
                     </p>
                 )}
             </main>
+
+            <Footer />
         </div>
     );
 }

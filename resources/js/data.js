@@ -11,17 +11,28 @@ export const images = {
 };
 
 export const navLinks = [
-    'Home',
-    'About',
-    'Programs',
-    // 'Verses & Vibes',
-    // 'Wellness',
-    'Events',
-    'Contact',
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/the-adorable-savage' },
+    { label: 'Our Pillars', href: '/#programs' },
+    { label: 'Events', href: '/#events' },
+    { label: 'Contact', href: '/#contact' },
 ];
 
-export function sectionHref(label) {
-    return `#${label.toLowerCase().replace(/[^a-z]+/g, '')}`;
+export function sectionHref(labelOrLink) {
+    let href;
+
+    if (typeof labelOrLink === 'object' && labelOrLink?.href) {
+        href = labelOrLink.href;
+    } else {
+        href = `#${String(labelOrLink).toLowerCase().replace(/[^a-z]+/g, '')}`;
+    }
+
+    // Section hashes live on the home page — prefix so they work from any route.
+    if (href.startsWith('#')) {
+        return `/${href}`;
+    }
+
+    return href;
 }
 
 export const aboutPillars = [
