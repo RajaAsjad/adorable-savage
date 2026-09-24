@@ -39,6 +39,7 @@ export const aboutPillars = [
     {
         id: '01',
         title: 'ADORABLY HUMAN',
+        slug: 'adorably-human',
         sub: 'Healing • Addiction • Grief • Health',
         long: 'Adorably Human is our healing space: a tender, judgment-free place for anyone facing addiction, grief, or health struggles. Here, you\'re not fixed or broken. You\'re human, and that\'s more than enough.',
         color: 'from-[#A78BFA] to-[#2DD4BF]',
@@ -47,6 +48,7 @@ export const aboutPillars = [
     {
         id: '02',
         title: 'UNFILTERED WELLNESS',
+        slug: 'unfiltered-wellness',
         sub: 'Essential Oils • Sound • Crystals • Self-Care',
         long: 'Unfiltered Wellness is where self-care goes deeper. Using essential oils, sound frequencies, and crystals, we help you tap into life-changing tools for balance, energy, and self-empowerment; no masks, no filters, just real self-care that works with your body and spirit.',
         color: 'from-[#FDE047] to-[#14B8A6]',
@@ -55,6 +57,7 @@ export const aboutPillars = [
     {
         id: '03',
         title: 'VERSES AND VIBES',
+        slug: 'verses-and-vibes',
         sub: 'Music • Artists • Songwriters • Care',
         long: 'Verses and Vibes is where we care for the creators behind the music: the artists and songwriters who pour themselves into every note. Because those who give us so much through their art deserve care in return.',
         color: 'from-[#FF6B9D] to-[#FF8A3D]',

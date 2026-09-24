@@ -63,6 +63,28 @@ class PageController extends Controller
         return $this->renderPage($request, $page);
     }
 
+    public function aboutPost(Request $request, string $slug): Response
+    {
+        $post = AboutPost::query()->where('slug', $slug)->firstOrFail();
+
+        if (! $post->isPublished() && ! $request->user()?->isAdmin()) {
+            throw new NotFoundHttpException;
+        }
+
+        return Inertia::render('AboutPost', [
+            'post' => [
+                'id' => $post->id,
+                'title' => $post->title,
+                'slug' => $post->slug,
+                'slogan_text' => $post->slogan_text,
+                'image_url' => $post->image_url,
+                'description' => $post->description,
+                'seo_title' => $post->seo_title,
+                'seo_description' => $post->seo_description,
+            ],
+        ]);
+    }
+
     private function renderPage(Request $request, Page $page): Response
     {
         $component = $this->templates->inertiaComponent($page->page_template);

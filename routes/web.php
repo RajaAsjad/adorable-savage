@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/pillars/{slug}', [PageController::class, 'aboutPost'])
+    ->name('pillars.show');
+
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|dashboard$|profile$|login$|register$|forgot-password$|reset-password$|verify-email$|confirm-password$|up$).+')
+    ->where('slug', '^(?!admin$|dashboard$|profile$|login$|register$|forgot-password$|reset-password$|verify-email$|confirm-password$|up$|pillars$).+')
     ->name('pages.show');
