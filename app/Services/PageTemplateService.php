@@ -57,6 +57,7 @@ class PageTemplateService
             'programs' => 'Templates/Programs',
             'events' => 'Templates/Events',
             'stay-vibe' => 'Templates/StayVibe',
+            'two-column' => 'Templates/TwoColumn',
             'default' => 'Templates/Default',
         ];
 
