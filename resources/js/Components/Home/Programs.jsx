@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import { programs } from '@/data';
 
 function stripHtml(html) {
@@ -67,7 +67,20 @@ function resolvePrograms(programPosts) {
 }
 
 export default function Programs({ page = null, programPosts = [] }) {
-    const scroller = useRef(null);
+    // --- Slider (commented for now; uncomment to restore carousel) ---
+    // const scroller = useRef(null);
+    // const scrollBy = (direction) => {
+    //     if (!scroller.current) {
+    //         return;
+    //     }
+    //
+    //     scroller.current.scrollBy({
+    //         left: direction === 'left' ? -360 : 360,
+    //         behavior: 'smooth',
+    //     });
+    // };
+    // --- End slider ---
+
     const title =
         stripHtml(getCustomField(page, 'title slogan')) ||
         page?.title ||
@@ -75,32 +88,27 @@ export default function Programs({ page = null, programPosts = [] }) {
     const intro = stripHtml(page?.description);
     const items = resolvePrograms(programPosts);
 
-    const scrollBy = (direction) => {
-        if (!scroller.current) {
-            return;
-        }
-
-        scroller.current.scrollBy({
-            left: direction === 'left' ? -360 : 360,
-            behavior: 'smooth',
-        });
-    };
-
     return (
         <section
             id="programs"
             className="relative mx-auto max-w-[1280px] px-6 py-20 lg:py-28"
         >
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-                <div>
+                <div className="mx-auto w-full text-center">
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
                         — OUR PILLARS
                     </div>
-                    <h2 className="font-display max-w-[700px] text-[40px] leading-[0.9] tracking-tight lg:text-[58px]">
+                    <h2 className="font-display mx-auto max-w-[700px] text-[40px] leading-[0.9] tracking-tight lg:text-[58px]">
                         <ProgramsTitle title={title} />
                     </h2>
-                    {intro ? <p className="mt-4 max-w-[640px] text-[15px] leading-[1.6] text-black/60">{intro}</p> : null}
+                    {intro ? (
+                        <p className="mx-auto mt-4 max-w-[640px] text-[15px] leading-[1.6] text-black/60">
+                            {intro}
+                        </p>
+                    ) : null}
                 </div>
+
+                {/* Slider arrows — uncomment with scroller above to restore
                 <div className="flex gap-2">
                     <button
                         type="button"
@@ -117,16 +125,21 @@ export default function Programs({ page = null, programPosts = [] }) {
                         →
                     </button>
                 </div>
+                */}
             </div>
 
+            {/* Centered static cards (slider off)
+            Slider version (uncomment + restore scroller ref to enable):
             <div
                 ref={scroller}
                 className="no-scrollbar flex snap-x gap-5 overflow-x-auto scroll-smooth pb-6"
             >
+            */}
+            <div className="flex flex-wrap justify-center gap-5 pb-6">
                 {items.map((program) => (
                     <div
                         key={program.name}
-                        className="group max-w-[340px] min-w-[320px] snap-start overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(0,0,0,0.3)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-18px_rgba(0,0,0,0.3)]"
+                        className="group w-full max-w-[340px] overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(0,0,0,0.3)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-18px_rgba(0,0,0,0.3)] sm:w-[320px]"
                     >
                         <div className="relative h-[220px] overflow-hidden">
                             <img
