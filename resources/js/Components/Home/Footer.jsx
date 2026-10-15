@@ -1,4 +1,4 @@
-import { programs, sectionHref } from '@/data';
+import { sectionHref } from '@/data';
 import { usePage } from '@inertiajs/react';
 
 const exploreLinks = [
@@ -6,6 +6,11 @@ const exploreLinks = [
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'Our Pillars', href: '/#programs' },
     { label: 'Events', href: '/#events' },
+];
+const programLinks = [
+    'Verses & Vibes',
+    'Unapologetic Wellness',
+    'Real, Raw, Relatable',
 ];
 const socialLinks = ['Instagram', 'YouTube', 'Facebook', 'TikTok'];
 
@@ -84,13 +89,13 @@ export default function Footer() {
                             PROGRAMS
                         </div>
                         <div className="space-y-2 text-[14px]">
-                            {programs.slice(0, 4).map((program) => (
+                            {programLinks.map((name) => (
                                 <a
-                                    key={program.name}
+                                    key={name}
                                     href="/#programs"
                                     className="block transition hover:text-white"
                                 >
-                                    {program.name}
+                                    {name}
                                 </a>
                             ))}
                         </div>
@@ -132,7 +137,7 @@ export default function Footer() {
                         <div className="mt-3 text-[11px] opacity-50">
                             No spam. Just vibes, events, and real notes from humans.
                         </div>
-                        <div className="mt-8 flex items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.04] p-3">
+                        {/* <div className="mt-8 flex items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.04] p-3">
                             <div className="grid h-10 w-10 place-items-center rounded-full bg-[#FDE047] text-black">
                                 ♔
                             </div>
@@ -144,7 +149,22 @@ export default function Footer() {
                                     EIN: 84-123456 • All donations tax-deductible
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                       <div className="mt-8 flex items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.04] p-3">
+    <div className="grid h-10 w-10 place-items-center rounded-full bg-[#FDE047] text-black">
+        ♔
+    </div>
+
+    <div className="text-[12px] leading-tight">
+        <div className="font-semibold text-white">
+            501(c)(3) Status Pending
+        </div>
+
+        <div className="opacity-60">
+            Tax-exempt status application pending.
+        </div>
+    </div>
+</div>
                     </div>
                 </div>
 
