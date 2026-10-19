@@ -41,7 +41,7 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
 
                 <div className="flex items-center gap-3">
                     <a
-                        href="/#donate"
+                        href="/donate"
                         className="group relative hidden overflow-hidden rounded-full bg-[#131313] px-7 py-[11px] text-[13px] font-bold tracking-wide text-white md:inline-flex"
                     >
                         <span className="relative z-10 flex items-center gap-2">
@@ -78,7 +78,7 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
                             </a>
                         ))}
                         <a
-                            href="/#donate"
+                            href="/donate"
                             className="mt-2 rounded-full bg-[#131313] px-6 py-3 text-center font-bold text-white"
                         >
                             DONATE

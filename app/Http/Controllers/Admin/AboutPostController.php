@@ -20,8 +20,9 @@ class AboutPostController extends Controller
     {
         return Inertia::render('Admin/AboutPosts/Index', [
             'posts' => AboutPost::query()
-                ->latest()
-                ->paginate(15)
+                ->orderBy('sort_order')
+                ->orderBy('id')
+                ->paginate(50)
                 ->through(fn (AboutPost $post) => [
                     'id' => $post->id,
                     'title' => $post->title,
@@ -29,9 +30,28 @@ class AboutPostController extends Controller
                     'slogan_text' => $post->slogan_text,
                     'image_url' => $post->image_url,
                     'status' => $post->status,
+                    'sort_order' => $post->sort_order,
                     'updated_at' => $post->updated_at?->format('M j, Y'),
                 ]),
         ]);
+    }
+
+    public function moveUp(AboutPost $aboutPost): RedirectResponse
+    {
+        $this->aboutPosts->moveUp($aboutPost);
+
+        return redirect()
+            ->route('admin.about-posts.index')
+            ->with('success', 'About post moved up.');
+    }
+
+    public function moveDown(AboutPost $aboutPost): RedirectResponse
+    {
+        $this->aboutPosts->moveDown($aboutPost);
+
+        return redirect()
+            ->route('admin.about-posts.index')
+            ->with('success', 'About post moved down.');
     }
 
     public function create(): Response
@@ -59,6 +79,7 @@ class AboutPostController extends Controller
                 'image_url' => $aboutPost->image_url,
                 'description' => $aboutPost->description,
                 'status' => $aboutPost->status,
+                'sort_order' => $aboutPost->sort_order,
                 'seo_title' => $aboutPost->seo_title,
                 'seo_description' => $aboutPost->seo_description,
             ],

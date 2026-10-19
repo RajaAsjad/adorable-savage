@@ -16,6 +16,7 @@ class AboutPostService
         $post = new AboutPost;
         $post->fill($this->attributes($data));
         $post->slug = AboutPost::uniqueSlug($post->title);
+        $post->sort_order = $data['sort_order'] ?? $this->nextSortOrder();
 
         if ($image) {
             $post->image_url = $this->storeImage($image);
@@ -24,6 +25,48 @@ class AboutPostService
         $post->save();
 
         return $post;
+    }
+
+    public function moveUp(AboutPost $post): void
+    {
+        $neighbor = AboutPost::query()
+            ->where('sort_order', '<', $post->sort_order)
+            ->orderByDesc('sort_order')
+            ->first();
+
+        if (! $neighbor) {
+            return;
+        }
+
+        $this->swapSortOrder($post, $neighbor);
+    }
+
+    public function moveDown(AboutPost $post): void
+    {
+        $neighbor = AboutPost::query()
+            ->where('sort_order', '>', $post->sort_order)
+            ->orderBy('sort_order')
+            ->first();
+
+        if (! $neighbor) {
+            return;
+        }
+
+        $this->swapSortOrder($post, $neighbor);
+    }
+
+    private function swapSortOrder(AboutPost $a, AboutPost $b): void
+    {
+        $temp = $a->sort_order;
+        $a->sort_order = $b->sort_order;
+        $b->sort_order = $temp;
+        $a->save();
+        $b->save();
+    }
+
+    private function nextSortOrder(): int
+    {
+        return (int) AboutPost::query()->max('sort_order') + 1;
     }
 
     /**
@@ -59,7 +102,7 @@ class AboutPostService
      */
     private function attributes(array $data): array
     {
-        return [
+        $attributes = [
             'title' => $data['title'],
             'slogan_text' => $data['slogan_text'] ?? null,
             'description' => $data['description'] ?? null,
@@ -67,6 +110,12 @@ class AboutPostService
             'seo_title' => $data['seo_title'] ?? null,
             'seo_description' => $data['seo_description'] ?? null,
         ];
+
+        if (array_key_exists('sort_order', $data) && $data['sort_order'] !== null && $data['sort_order'] !== '') {
+            $attributes['sort_order'] = (int) $data['sort_order'];
+        }
+
+        return $attributes;
     }
 
     private function storeImage(UploadedFile $image): string

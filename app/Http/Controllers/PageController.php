@@ -131,6 +131,7 @@ class PageController extends Controller
     {
         return AboutPost::query()
             ->published()
+            ->orderBy('sort_order')
             ->orderBy('id')
             ->get()
             ->values()

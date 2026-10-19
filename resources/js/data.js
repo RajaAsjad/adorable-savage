@@ -15,6 +15,8 @@ export const navLinks = [
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'Our Pillars', href: '/#programs' },
     { label: 'Events', href: '/#events' },
+    { label: 'Partners & Donors', href: '#partners-and-donors' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/#contact' },
 ];
 

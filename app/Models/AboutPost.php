@@ -23,6 +23,7 @@ class AboutPost extends Model
         'image_url',
         'description',
         'status',
+        'sort_order',
         'seo_title',
         'seo_description',
     ];

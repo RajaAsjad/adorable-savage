@@ -63,6 +63,12 @@ export default function Dashboard({ stats }) {
                     hint="Event listings"
                     tone="bg-blush/15"
                 />
+                <StatCard
+                    label="Total Blog Posts"
+                    value={stats.blogs ?? 0}
+                    hint="Published & draft blogs"
+                    tone="bg-teal/15"
+                />
             </div>
 
             <div className="mt-8 grid gap-5 lg:grid-cols-2">

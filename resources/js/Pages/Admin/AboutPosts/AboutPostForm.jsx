@@ -20,6 +20,7 @@ export default function AboutPostForm({
         remove_image: false,
         description: post?.description || '',
         status: post?.status || 'draft',
+        sort_order: post?.sort_order ?? '',
         seo_title: post?.seo_title || '',
         seo_description: post?.seo_description || '',
         _method: method === 'put' ? 'put' : 'post',
@@ -140,6 +141,24 @@ export default function AboutPostForm({
                             <option value="published">Published</option>
                         </select>
                         <InputError className="mt-2" message={errors.status} />
+                    </div>
+
+                    <div className="mt-5">
+                        <InputLabel htmlFor="sort_order" value="Sort Order" />
+                        <TextInput
+                            id="sort_order"
+                            type="number"
+                            min="0"
+                            className="mt-2 block w-full"
+                            value={data.sort_order}
+                            onChange={(e) => setData('sort_order', e.target.value)}
+                            placeholder="Auto"
+                        />
+                        <p className="mt-2 text-[12px] text-black/45">
+                            Lower number shows first on the website. Leave empty
+                            on create to auto-append.
+                        </p>
+                        <InputError className="mt-2" message={errors.sort_order} />
                     </div>
 
                     <div className="mt-6 flex flex-wrap gap-3">

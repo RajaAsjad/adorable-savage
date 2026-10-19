@@ -24,6 +24,15 @@ export default function Index({ posts }) {
         router.delete(route('admin.about-posts.destroy', id));
     };
 
+    const move = (id, direction) => {
+        const named =
+            direction === 'up'
+                ? 'admin.about-posts.move-up'
+                : 'admin.about-posts.move-down';
+
+        router.post(route(named, id), {}, { preserveScroll: true });
+    };
+
     return (
         <AdminLayout title="About Posts">
             <Head title="About Posts" />
@@ -34,7 +43,8 @@ export default function Index({ posts }) {
                         Content
                     </div>
                     <p className="mt-1 text-[14px] text-black/55">
-                        Manage About section pillar cards.
+                        Manage About section pillar cards. Use arrows to change
+                        front-end order.
                     </p>
                 </div>
                 <Link
@@ -49,6 +59,7 @@ export default function Index({ posts }) {
                 <table className="min-w-full text-left">
                     <thead className="border-b border-black/5 bg-cream/60 text-[11px] font-bold uppercase tracking-[0.16em] text-black/40">
                         <tr>
+                            <th className="px-6 py-4">Order</th>
                             <th className="px-6 py-4">Title</th>
                             <th className="px-6 py-4">Slogan</th>
                             <th className="px-6 py-4">Status</th>
@@ -60,18 +71,49 @@ export default function Index({ posts }) {
                         {posts.data.length === 0 && (
                             <tr>
                                 <td
-                                    colSpan={5}
+                                    colSpan={6}
                                     className="px-6 py-12 text-center text-sm text-black/45"
                                 >
                                     No about posts yet. Add your first post.
                                 </td>
                             </tr>
                         )}
-                        {posts.data.map((post) => (
+                        {posts.data.map((post, index) => (
                             <tr
                                 key={post.id}
                                 className="border-b border-black/5 last:border-0"
                             >
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-2">
+                                        <span className="grid h-8 w-8 place-items-center rounded-full bg-black/5 text-[12px] font-bold text-ink">
+                                            {String(index + 1).padStart(2, '0')}
+                                        </span>
+                                        <div className="flex flex-col gap-1">
+                                            <button
+                                                type="button"
+                                                disabled={index === 0}
+                                                onClick={() => move(post.id, 'up')}
+                                                className="grid h-7 w-7 place-items-center rounded-full border border-black/10 text-[12px] transition hover:bg-ink hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                                                title="Move up"
+                                            >
+                                                ↑
+                                            </button>
+                                            <button
+                                                type="button"
+                                                disabled={
+                                                    index === posts.data.length - 1
+                                                }
+                                                onClick={() =>
+                                                    move(post.id, 'down')
+                                                }
+                                                className="grid h-7 w-7 place-items-center rounded-full border border-black/10 text-[12px] transition hover:bg-ink hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                                                title="Move down"
+                                            >
+                                                ↓
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td className="px-6 py-4">
                                     <div className="flex items-center gap-3">
                                         {post.image_url && (
@@ -108,7 +150,10 @@ export default function Index({ posts }) {
                                 </td>
                                 <td className="px-6 py-4 text-right text-[12px] font-bold uppercase tracking-wide">
                                     <Link
-                                        href={route('admin.about-posts.edit', post.id)}
+                                        href={route(
+                                            'admin.about-posts.edit',
+                                            post.id,
+                                        )}
                                         className="text-ink hover:text-blush"
                                     >
                                         Edit

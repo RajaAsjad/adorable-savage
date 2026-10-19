@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AboutPost;
+use App\Models\Blog;
 use App\Models\Event;
 use App\Models\ProgramPost;
 use App\Models\User;
@@ -21,6 +22,7 @@ class DashboardController extends Controller
                 'about_posts' => AboutPost::query()->count(),
                 'program_posts' => ProgramPost::query()->count(),
                 'events' => Event::query()->count(),
+                'blogs' => Blog::query()->count(),
             ],
         ]);
     }

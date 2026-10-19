@@ -111,6 +111,14 @@ export default function AdminLayout({ title, children }) {
                         About Posts
                     </NavItem>
 
+                    <NavItem
+                        href={route('admin.blogs.index')}
+                        active={route().current('admin.blogs.*')}
+                        icon="✎"
+                    >
+                        Blog
+                    </NavItem>
+
                     <div>
                         <button
                             type="button"

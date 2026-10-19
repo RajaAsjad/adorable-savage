@@ -25,6 +25,7 @@ class AboutPostRequest extends FormRequest
             'remove_image' => ['sometimes', 'boolean'],
             'description' => ['nullable', 'string'],
             'status' => ['required', Rule::in(['draft', 'published'])],
+            'sort_order' => ['nullable', 'integer', 'min:0', 'max:9999'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:500'],
         ];

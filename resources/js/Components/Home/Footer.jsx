@@ -6,6 +6,7 @@ const exploreLinks = [
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'Our Pillars', href: '/#programs' },
     { label: 'Events', href: '/#events' },
+    { label: 'Blog', href: '/blog' },
 ];
 const programLinks = [
     'Verses & Vibes',
@@ -59,7 +60,7 @@ export default function Footer() {
                         <div className="mt-8">
                             <a
                                 id="donate"
-                                href="#donate"
+                                href="/donate"
                                 className="inline-flex gap-2 rounded-full bg-white px-6 py-3 text-[12px] font-bold tracking-wide text-black transition hover:bg-[#FF6B9D] hover:text-white"
                             >
                                 DONATE TODAY <span>♥</span>
