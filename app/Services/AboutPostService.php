@@ -106,6 +106,7 @@ class AboutPostService
             'title' => $data['title'],
             'slogan_text' => $data['slogan_text'] ?? null,
             'description' => $data['description'] ?? null,
+            'ticker_text' => $data['ticker_text'] ?? null,
             'status' => $data['status'],
             'seo_title' => $data['seo_title'] ?? null,
             'seo_description' => $data['seo_description'] ?? null,

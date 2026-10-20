@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PageSeeder::class);
         $this->call(AboutPostSeeder::class);
+        $this->call(TickerSeeder::class);
         $this->call(ProgramCategorySeeder::class);
         $this->call(ProgramPostSeeder::class);
         $this->call(EventCategorySeeder::class);

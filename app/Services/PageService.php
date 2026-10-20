@@ -63,6 +63,7 @@ class PageService
             'title' => $data['title'],
             'page_template' => $data['page_template'],
             'description' => $data['description'] ?? null,
+            'ticker_text' => $data['ticker_text'] ?? null,
             'status' => $data['status'],
             'seo_title' => $data['seo_title'] ?? null,
             'seo_description' => $data['seo_description'] ?? null,

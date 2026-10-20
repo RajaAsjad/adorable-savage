@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import Footer from '@/Components/Home/Footer';
 import Header from '@/Components/Home/Header';
+import ScrollingTicker from '@/Components/Home/ScrollingTicker';
+import { resolveAboutTickerLines } from '@/data/tickerContent';
 
 export default function AboutPost({ post }) {
     const [scrolled, setScrolled] = useState(false);
@@ -15,6 +17,11 @@ export default function AboutPost({ post }) {
     }, []);
 
     const title = post?.seo_title || post?.title || 'Pillar';
+    const tickerLines = resolveAboutTickerLines(
+        post?.slug,
+        post?.title,
+        post?.ticker_text,
+    );
 
     return (
         <div className="relative min-h-screen overflow-x-hidden bg-[#FFFBF0] text-[#131313] selection:bg-[#FF6B9D] selection:text-white">
@@ -66,6 +73,13 @@ export default function AboutPost({ post }) {
                     </p>
                 )}
             </main>
+
+            {tickerLines && (
+                <ScrollingTicker
+                    items={tickerLines}
+                    label={`${post?.title || 'About'} affirmations`}
+                />
+            )}
 
             <Footer />
         </div>

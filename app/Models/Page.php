@@ -22,6 +22,7 @@ class Page extends Model
         'page_template',
         'image',
         'description',
+        'ticker_text',
         'status',
         'seo_title',
         'seo_description',

@@ -78,6 +78,7 @@ class AboutPostController extends Controller
                 'slogan_text' => $aboutPost->slogan_text,
                 'image_url' => $aboutPost->image_url,
                 'description' => $aboutPost->description,
+                'ticker_text' => $aboutPost->ticker_text,
                 'status' => $aboutPost->status,
                 'sort_order' => $aboutPost->sort_order,
                 'seo_title' => $aboutPost->seo_title,

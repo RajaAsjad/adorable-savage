@@ -22,6 +22,7 @@ export default function PageForm({
         image: null,
         remove_image: false,
         description: page?.description || '',
+        ticker_text: page?.ticker_text || '',
         status: page?.status || 'draft',
         seo_title: page?.seo_title || '',
         seo_description: page?.seo_description || '',
@@ -151,6 +152,32 @@ export default function PageForm({
                             />
                         </div>
                         <InputError className="mt-2" message={errors.description} />
+                    </div>
+
+                    <div className="mt-8">
+                        <InputLabel
+                            htmlFor="ticker_text"
+                            value="Scrolling Ticker"
+                        />
+                        <p className="mt-1 text-[13px] text-black/45">
+                            {data.page_template === 'home'
+                                ? 'Shown on the Home page directly under the Hero. One statement per line.'
+                                : 'Optional scrolling ticker for this page. One statement per line.'}
+                        </p>
+                        <textarea
+                            id="ticker_text"
+                            rows={8}
+                            className="mt-2 block w-full rounded-3xl border-black/10 bg-cream shadow-sm focus:border-blush focus:ring-blush"
+                            value={data.ticker_text}
+                            onChange={(e) =>
+                                setData('ticker_text', e.target.value)
+                            }
+                            placeholder={"YOU'RE SOFT.\nYOU'RE WILD.\nYOU'RE ADORABLE."}
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.ticker_text}
+                        />
                     </div>
                 </div>
 

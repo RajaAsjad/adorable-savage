@@ -27,6 +27,7 @@ class PageRequest extends FormRequest
             'image' => ['nullable', 'image', 'max:2048'],
             'remove_image' => ['sometimes', 'boolean'],
             'description' => ['nullable', 'string'],
+            'ticker_text' => ['nullable', 'string'],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:500'],

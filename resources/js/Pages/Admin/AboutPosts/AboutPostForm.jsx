@@ -19,6 +19,7 @@ export default function AboutPostForm({
         image: null,
         remove_image: false,
         description: post?.description || '',
+        ticker_text: post?.ticker_text || '',
         status: post?.status || 'draft',
         sort_order: post?.sort_order ?? '',
         seo_title: post?.seo_title || '',
@@ -79,6 +80,31 @@ export default function AboutPostForm({
                             />
                         </div>
                         <InputError className="mt-2" message={errors.description} />
+                    </div>
+
+                    <div className="mt-8">
+                        <InputLabel
+                            htmlFor="ticker_text"
+                            value="Scrolling Ticker"
+                        />
+                        <p className="mt-1 text-[13px] text-black/45">
+                            Shown on this About post detail page, above the
+                            footer. One statement per line.
+                        </p>
+                        <textarea
+                            id="ticker_text"
+                            rows={8}
+                            className="mt-2 block w-full rounded-3xl border-black/10 bg-cream shadow-sm focus:border-blush focus:ring-blush"
+                            value={data.ticker_text}
+                            onChange={(e) =>
+                                setData('ticker_text', e.target.value)
+                            }
+                            placeholder={"YOU'RE THE BEAT.\nYOU'RE THE CHORUS.\nYOU'RE SAVAGE."}
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.ticker_text}
+                        />
                     </div>
                 </div>
 

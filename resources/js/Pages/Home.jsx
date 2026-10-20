@@ -7,6 +7,7 @@ import Events from '@/Components/Home/Events';
 import Footer from '@/Components/Home/Footer';
 import Header from '@/Components/Home/Header';
 import Hero from '@/Components/Home/Hero';
+import HeroTicker from '@/Components/Home/HeroTicker';
 import Manifesto from '@/Components/Home/Manifesto';
 import Philosophy from '@/Components/Home/Philosophy';
 import Programs from '@/Components/Home/Programs';
@@ -63,6 +64,7 @@ export default function Home({
                 setMenuOpen={setMenuOpen}
             />
             <Hero playing={playing} page={page} />
+            <HeroTicker tickerText={page?.ticker_text} />
             <About page={aboutPage} aboutPosts={aboutPosts} />
             <Philosophy />
             <Programs page={programsPage} programPosts={programPosts} />

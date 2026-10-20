@@ -22,6 +22,7 @@ class AboutPost extends Model
         'slogan_text',
         'image_url',
         'description',
+        'ticker_text',
         'status',
         'sort_order',
         'seo_title',

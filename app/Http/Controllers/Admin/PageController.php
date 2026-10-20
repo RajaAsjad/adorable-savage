@@ -62,6 +62,7 @@ class PageController extends Controller
                 'page_template' => $page->page_template,
                 'image' => $page->image,
                 'description' => $page->description,
+                'ticker_text' => $page->ticker_text,
                 'status' => $page->status,
                 'seo_title' => $page->seo_title,
                 'seo_description' => $page->seo_description,

@@ -37,6 +37,17 @@ html {
     animation: marquee 28s linear infinite;
 }
 
+.hero-ticker {
+    animation: marquee 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee,
+    .hero-ticker {
+        animation: none;
+    }
+}
+
 @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
