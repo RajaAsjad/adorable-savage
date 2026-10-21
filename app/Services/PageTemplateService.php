@@ -57,6 +57,9 @@ class PageTemplateService
             'programs' => 'Templates/Programs',
             'events' => 'Templates/Events',
             'stay-vibe' => 'Templates/StayVibe',
+            'contact' => 'Templates/Contact',
+            'get-involved' => 'Templates/GetInvolved',
+            'adorable-savage' => 'Templates/AdorableSavage',
             'two-column' => 'Templates/TwoColumn',
             'default' => 'Templates/Default',
         ];

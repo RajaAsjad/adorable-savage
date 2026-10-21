@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProgramCategoryController;
 use App\Http\Controllers\Admin\ProgramPostController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,8 @@ Route::get('/pillars/{slug}', [PageController::class, 'aboutPost'])
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/{slug}', [PageController::class, 'show'])
     ->where('slug', '^(?!admin$|dashboard$|profile$|login$|register$|forgot-password$|reset-password$|verify-email$|confirm-password$|up$|pillars$|blog$).+')

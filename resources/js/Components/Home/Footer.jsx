@@ -6,6 +6,7 @@ const exploreLinks = [
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'Our Pillars', href: '/#programs' },
     { label: 'Events', href: '/#events' },
+    { label: 'Get Involved', href: '/get-involved' },
     { label: 'Blog', href: '/blog' },
 ];
 const programLinks = [
@@ -178,7 +179,7 @@ export default function Footer() {
                         <a href="#" className="hover:opacity-100">
                             Terms
                         </a>
-                        <a href="#" className="hover:opacity-100">
+                        <a href="/contact" className="hover:opacity-100">
                             Contact
                         </a>
                     </div>

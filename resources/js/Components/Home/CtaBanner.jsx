@@ -29,7 +29,7 @@ export default function CtaBanner() {
                                 EXPLORE PROGRAMS <span>↗</span>
                             </a>
                             <a
-                                href="#contact"
+                                href="/contact"
                                 className="rounded-full border border-white/20 px-7 py-3 text-[13px] font-bold tracking-wide transition hover:bg-white hover:text-black"
                             >
                                 CONNECT WITH US

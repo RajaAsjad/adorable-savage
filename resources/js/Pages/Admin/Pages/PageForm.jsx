@@ -101,7 +101,15 @@ export default function PageForm({
                                           ? 'Events Intro'
                                           : data.page_template === 'stay-vibe'
                                             ? 'Stay Vibe Intro'
-                                            : 'Content'
+                                            : data.page_template === 'contact'
+                                              ? 'Contact Intro'
+                                              : data.page_template ===
+                                                  'get-involved'
+                                                ? 'Get Involved Intro'
+                                                : data.page_template ===
+                                                    'adorable-savage'
+                                                  ? 'The Concept (Left Column)'
+                                                  : 'Content'
                             }
                         />
                         {data.page_template === 'home' && (
@@ -142,6 +150,36 @@ export default function PageForm({
                                 Include &quot;vibe&quot; for the pink script
                                 style. This editor is the intro under it.
                                 Social images stay the same.
+                            </p>
+                        )}
+                        {data.page_template === 'contact' && (
+                            <p className="mt-1 text-[13px] text-black/45">
+                                The page Title is the Contact heading (last word
+                                gets pink script). This editor is the intro under
+                                it. Featured image shows beside the form. Use
+                                Custom Fields for: eyebrow, email, phone,
+                                location, hours, form_heading, form_button,
+                                form_note, instagram.
+                            </p>
+                        )}
+                        {data.page_template === 'get-involved' && (
+                            <p className="mt-1 text-[13px] text-black/45">
+                                The page Title is the main heading. This editor
+                                is the intro paragraph. Below intro: pillars via
+                                pillar_1_name / pillar_1_tagline (and 2, 3).
+                                Four cards use donate_, volunteer_, sponsor_,
+                                artists_ (_title, _text, _cta, _url) +
+                                donate_note. Also: eyebrow, closing.
+                            </p>
+                        )}
+                        {data.page_template === 'adorable-savage' && (
+                            <p className="mt-1 text-[13px] text-black/45">
+                                Page Title is the centered top heading. This
+                                editor is the left column (&quot;The Concept&quot;).
+                                Put the founder letter in Custom Field
+                                founder_note. Optional: left_heading,
+                                right_heading, founder_signature, eyebrow. No
+                                featured image needed for this template.
                             </p>
                         )}
                         <div className="mt-2 overflow-hidden rounded-2xl border border-black/10 bg-cream">

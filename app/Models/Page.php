@@ -44,8 +44,12 @@ class Page extends Model
      */
     public function getCustomField(string $name, mixed $default = null): mixed
     {
+        $needle = Str::lower(trim($name));
+
         foreach ($this->custom_fields ?? [] as $field) {
-            if (($field['name'] ?? null) === $name) {
+            $fieldName = Str::lower(trim((string) ($field['name'] ?? '')));
+
+            if ($fieldName !== '' && $fieldName === $needle) {
                 return $field['value'] ?? $default;
             }
         }

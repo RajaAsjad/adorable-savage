@@ -78,5 +78,8 @@ HTML;
                 $attributes
             );
         }
+
+        // Contact, Get Involved, The Adorable Savage
+        $this->call(NewWebsitePagesSeeder::class);
     }
 }
