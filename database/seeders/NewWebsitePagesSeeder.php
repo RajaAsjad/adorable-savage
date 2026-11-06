@@ -6,59 +6,20 @@ use App\Models\Page;
 use Illuminate\Database\Seeder;
 
 /**
- * Seeds ONLY Contact, Get Involved, and The Adorable Savage.
+ * Seeds Contact + Get Involved (safe create-only).
+ * About Me (/the-adorable-savage) is created only if missing via AboutMePageSeeder.
  *
- * Safe for live — does NOT touch Home, About, Programs, Events, or any other data.
- *
+ * Safe for live — does NOT overwrite existing pages:
  *   php artisan db:seed --class=NewWebsitePagesSeeder --force
  *
- * Uses firstOrCreate by slug:
- * - page missing  → create with full content
- * - page already exists → leave it exactly as-is (no overwrite)
+ * To refresh About Me content on live (overwrite that page only):
+ *   php artisan db:seed --class=AboutMePageSeeder --force
  */
 class NewWebsitePagesSeeder extends Seeder
 {
     public function run(): void
     {
         $pages = [
-            [
-                'title' => 'The Adorable Savage',
-                'slug' => 'the-adorable-savage',
-                'page_template' => 'adorable-savage',
-                'image' => null,
-                'description' => <<<'HTML'
-<p>Adorable started out as a name I gave myself.</p>
-<p>Savage came from a dear friend, someone who was able to see me just as I am. She reminded me that I have had savage moments in my life. Moments when I dug in, told the truth, and refused to quit. I hadn't been counting those. She had.</p>
-<p>Adorable Savage stuck because it was true.</p>
-<p>Adorable is the soft part; the part that feels everything, that cries, that cares, that stays open when it would be easier to shut down. Savage is the part that gets back up. The part that sets the boundary and does the hard thing anyway.</p>
-<p>I used to think I had to choose. I've come to believe the opposite: that the whole point of being human is to carry both. And I believe every single person already does. Some have buried their adorability under years of being told they were too much or not enough. Some have lost their grip on their savage; it went quiet, or it turned into anger, or it turned on them. Some want more of it. Some want less.</p>
-<p>Sometimes it takes a friend to see it in you before you can see it in yourself. That's what this organization is for. Whatever it is, I'm calling it your Adorable Savage, and we exist to help you find it.</p>
-HTML,
-                'status' => Page::STATUS_PUBLISHED,
-                'seo_title' => 'The Adorable Savage — Our Story',
-                'seo_description' => 'The Concept and a note from founder Lyann Noe — soft enough to feel it all, savage enough to keep going.',
-                'ticker_text' => null,
-                'custom_fields' => [
-                    ['name' => 'eyebrow', 'value' => 'OUR STORY'],
-                    ['name' => 'left_heading', 'value' => 'The Concept'],
-                    ['name' => 'right_heading', 'value' => 'A Note from the Founder'],
-                    [
-                        'name' => 'founder_note',
-                        'value' => <<<'HTML'
-<p>I have 25 years of continued recovery from addiction. I am also a survivor of sexual, physical, emotional, mental, and verbal abuse. Along the way, people have asked me how I do it after all I've been through.</p>
-<p>That is the savage part of me.</p>
-<p>Here's what I've learned: what I have isn't a secret. Just like everyone else, I was given exactly what I needed, I just had to learn to see it. Somewhere in the mess, I began to see myself through a different pair of glasses. Glasses that were much clearer than the ones I'd been wearing. And with reassurance, I started to trust what I was seeing. I began to truly, honestly, freely love myself. Not the polished version. The whole being. Flaws and strengths, grit and tears, inside and out. That is the adorable part of me. And once that happened, the rest started to move. I could grieve. I could heal. I moved from victim to victor.</p>
-<p>I could live without the things that used to run my life. Eventually I found myself loving me as much as I loved the people around me. I had always been able to love another person without loving myself but it wasn't real. It couldn't be. Now it is.</p>
-<p>It was slow. It was adorable. And it was deeply, stubbornly savage.</p>
-<p>My friends know me but not all of me. This organization is my way of opening the rest of it up, because I want you to see that if I could do this, you can do anything. You already have everything.</p>
-HTML,
-                    ],
-                    [
-                        'name' => 'founder_signature',
-                        'value' => '— Lyann Noe, The Adorable Savage, Founder',
-                    ],
-                ],
-            ],
             [
                 'title' => 'Get in touch',
                 'slug' => 'contact',
@@ -158,6 +119,13 @@ HTML,
 
         if ($skipped !== []) {
             $this->command?->warn('Already existed (left unchanged): '.implode(', ', $skipped));
+        }
+
+        // About Me page: create only when missing (AboutMePageSeeder has full content).
+        if (! Page::query()->where('slug', 'the-adorable-savage')->exists()) {
+            $this->call(AboutMePageSeeder::class);
+        } else {
+            $this->command?->warn('Already existed (left unchanged): /the-adorable-savage');
         }
     }
 }

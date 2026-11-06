@@ -174,12 +174,12 @@ export default function PageForm({
                         )}
                         {data.page_template === 'adorable-savage' && (
                             <p className="mt-1 text-[13px] text-black/45">
-                                Page Title is the centered top heading. This
-                                editor is the left column (&quot;The Concept&quot;).
-                                Put the founder letter in Custom Field
-                                founder_note. Optional: left_heading,
-                                right_heading, founder_signature, eyebrow. No
-                                featured image needed for this template.
+                                Page Title is the centered heading. This editor
+                                is the intro under the tagline. Custom Fields:
+                                eyebrow, tagline, meet_heading, meet_body,
+                                pull_quote, origin_heading, origin_body,
+                                today_heading, today_body. No featured image
+                                needed.
                             </p>
                         )}
                         <div className="mt-2 overflow-hidden rounded-2xl border border-black/10 bg-cream">
