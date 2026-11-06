@@ -4,9 +4,8 @@ import { usePage } from '@inertiajs/react';
 const exploreLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
-    { label: 'Our Pillars', href: '/#programs' },
-    { label: 'Events', href: '/#events' },
-    { label: 'Get Involved', href: '/get-involved' },
+    { label: 'COME FIND ME', href: '#' },
+    { label: 'YOUTUBE', href: '#' },
     { label: 'Blog', href: '/blog' },
 ];
 const programLinks = [

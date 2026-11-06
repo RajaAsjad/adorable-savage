@@ -161,7 +161,7 @@ html {
     font-weight: 500;
 }
 
-.hero-copy > h1,
+/* .hero-copy > h1,
 .hero-copy > h2,
 .hero-copy > h3 {
     margin: 0;
@@ -170,16 +170,26 @@ html {
     font-weight: 400;
     line-height: 0.9;
     letter-spacing: -0.04em;
+} */
+.hero-copy > h1,
+.hero-copy > h2,
+.hero-copy > h3 {
+    margin: 0;
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(2.5rem, 8vw, 5.20rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
 }
 
-.hero-copy > h1 + h1,
+/* .hero-copy > h1 + h1,
 .hero-copy > h2 + h2,
 .hero-copy > h1 + h2,
 .hero-copy > h2 + h1,
 .hero-copy > h2 + h3,
 .hero-copy > h3 + h2 {
     margin-top: 0.05em;
-}
+} */
 
 .hero-copy > h1 em,
 .hero-copy > h2 em,
@@ -190,7 +200,7 @@ html {
     display: inline-block;
     font-family: Caveat, cursive;
     font-style: normal;
-    font-size: 1.15em;
+    font-size: 45px;
     color: #ff6b9d;
     transform: translateY(0.15rem) rotate(-2deg);
     background-image: linear-gradient(

@@ -13,12 +13,23 @@ export const images = {
 export const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
-    { label: 'Our Pillars', href: '/#programs' },
-    { label: 'Events', href: '/#events' },
-    { label: 'GET INVOLVED', href: '/get-involved' },
+    { label: 'COME FIND ME', href: '#' },
+    {
+        label: 'YOUTUBE',
+        href: '#',
+        children: [
+            {
+                label: 'The Adorable Savage',
+                href: 'https://youtube.com/@theadorablesavage11t143?si=rLG_n8Isv9L1Q5Bb',
+            },
+            {
+                label: 'Verses And Vibes with The Adorable Savage',
+                href: 'https://youtube.com/@theadorablesavage143?si=lsfyhqvCyuY57sdz',
+            },
+        ],
+    },
     { label: 'Blog', href: '/blog' },
     { label: 'Merch', href: '#' },
-    { label: 'Contact', href: '/contact' },
 ];
 
 export function sectionHref(labelOrLink) {
