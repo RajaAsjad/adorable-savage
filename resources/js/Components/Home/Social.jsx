@@ -78,7 +78,7 @@ export default function Social({ page = null, galleryItems = [] }) {
                 </div>
                 <div className="flex gap-2 text-[11px] font-bold tracking-widest">
                     <span className="rounded-full bg-black px-4 py-2 text-white">
-                        @ADORABLESAVAGE
+                    @theadorablesavage143.
                     </span>
                     <span className="rounded-full border border-black/10 px-4 py-2">
                         INSTAGRAM • YOUTUBE • TIKTOK

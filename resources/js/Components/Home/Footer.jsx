@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react';
 const exploreLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
-    { label: 'COME FIND ME', href: '#' },
+    { label: 'Come Find Me', href: '#' },
     // { label: 'YOUTUBE', href: '#' },
     { label: 'Blog', href: '/blog' },
 ];
@@ -111,7 +111,7 @@ export default function Footer() {
     // const footerLogo = branding?.footer_logo || branding?.site_logo;
     const copyright =
         branding?.copyright ||
-        '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO';
+        '© 2026 The Adorable Savage • Made with joy in Denver, CO';
 
     return (
         <footer className="relative mt-8 overflow-hidden rounded-t-[36px] bg-[#0A0A0A] px-6 pb-8 pt-16 text-white/70">

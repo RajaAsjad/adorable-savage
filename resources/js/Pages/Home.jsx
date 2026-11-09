@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
 import About from '@/Components/Home/About';
-import Community from '@/Components/Home/Community';
+// import Community from '@/Components/Home/Community';
 import CtaBanner from '@/Components/Home/CtaBanner';
 import Events from '@/Components/Home/Events';
 import Footer from '@/Components/Home/Footer';
@@ -75,7 +75,7 @@ export default function Home({
                 eventCategories={eventCategories}
                 eventsList={eventsList}
             />
-            <Community />
+            {/* <Community /> */}
             <Manifesto />
             <Social page={stayVibePage} galleryItems={galleryItems} />
             <CtaBanner />
