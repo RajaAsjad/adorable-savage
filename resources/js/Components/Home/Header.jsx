@@ -185,10 +185,10 @@ export default function Header({ scrolled, menuOpen, setMenuOpen }) {
                             />
                         ))}
                         <a
-                            href="/donate"
+                            href="/contact"
                             className="mt-3 rounded-full bg-[#131313] px-6 py-3 text-center font-bold text-white"
                         >
-                            DONATE
+                           CONTACT
                         </a>
                     </nav>
                 </div>

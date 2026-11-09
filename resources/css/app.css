@@ -335,3 +335,82 @@ html {
     line-height: 1.6;
     color: rgba(0, 0, 0, 0.6);
 }
+
+/* About Me (/the-adorable-savage) — intro under tagline */
+.about-intro {
+    color: #131313;
+}
+
+.about-intro > h2 {
+    margin: 0 0 1.5rem;
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #131313;
+}
+
+.about-intro > p {
+    margin: 0 0 1.1rem;
+    font-size: clamp(0.98rem, 2vw, 1.125rem);
+    font-weight: 450;
+    line-height: 1.7;
+    color: rgba(0, 0, 0, 0.68);
+}
+
+.about-intro > p:last-child {
+    margin-bottom: 0;
+}
+
+.about-intro > p.intro-signature {
+    margin: 1.75rem 0;
+}
+
+.about-intro > p.intro-signature strong {
+    display: block;
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #131313;
+}
+
+.about-intro > p.intro-signature strong::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 3px;
+    margin: 0.85rem auto 0;
+    border-radius: 9999px;
+    background: #ff6b9d;
+}
+
+.about-intro > p strong:not(.intro-signature strong) {
+    font-weight: 700;
+    color: #131313;
+}
+
+.about-intro > p.intro-cta {
+    margin-top: 2rem;
+}
+
+.about-intro > p.intro-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: #131313;
+    padding: 0.9rem 1.85rem;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.about-intro > p.intro-cta a:hover {
+    background: #ff6b9d;
+}

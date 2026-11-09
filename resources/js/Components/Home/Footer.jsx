@@ -1,23 +1,114 @@
-import { sectionHref } from '@/data';
+import { navLinks, sectionHref } from '@/data';
 import { usePage } from '@inertiajs/react';
 
 const exploreLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'COME FIND ME', href: '#' },
-    { label: 'YOUTUBE', href: '#' },
+    // { label: 'YOUTUBE', href: '#' },
     { label: 'Blog', href: '/blog' },
 ];
 const programLinks = [
-    'Verses & Vibes',
-    'Unapologetic Wellness',
-    'Real, Raw, Relatable',
+  
 ];
-const socialLinks = ['Instagram', 'YouTube', 'Facebook', 'TikTok'];
+
+const youtubeLinks =
+    navLinks.find((link) => link.label.toUpperCase() === 'YOUTUBE')?.children ||
+    [];
+
+const socialLinks = [
+    {
+        label: 'Instagram',
+        href: 'https://www.instagram.com/theadorablesavage143/',
+    },
+    {
+        label: 'YouTube',
+        href: '#',
+        children: youtubeLinks,
+    },
+    { label: 'Facebook', href: '#' },
+];
+
+function isExternal(href) {
+    return (
+        typeof href === 'string' &&
+        (href.startsWith('http://') || href.startsWith('https://'))
+    );
+}
+
+function FooterSocialLink({ link }) {
+    const hasChildren =
+        Array.isArray(link.children) && link.children.length > 0;
+    const external = isExternal(link.href);
+
+    if (!hasChildren) {
+        return (
+            <a
+                href={link.href || '#'}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                className="block transition hover:text-white"
+            >
+                {link.label}
+            </a>
+        );
+    }
+
+    return (
+        <div className="group relative">
+            <button
+                type="button"
+                className="inline-flex items-center gap-1.5 transition hover:text-white"
+                aria-haspopup="true"
+            >
+                {link.label}
+                <svg
+                    className="h-3 w-3 opacity-50 transition duration-300 group-hover:rotate-180 group-hover:opacity-100"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M2.5 4.5L6 8l3.5-3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </button>
+
+            <div className="invisible absolute bottom-full left-0 z-50 mb-2 w-[260px] opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                <div className="overflow-hidden rounded-[16px] border border-white/10 bg-[#161616] p-2 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.55)]">
+                    {link.children.map((child) => (
+                        <a
+                            key={child.label}
+                            href={child.href}
+                            target={
+                                isExternal(child.href) ? '_blank' : undefined
+                            }
+                            rel={
+                                isExternal(child.href)
+                                    ? 'noopener noreferrer'
+                                    : undefined
+                            }
+                            className="block rounded-[12px] px-3 py-2.5 text-[13px] leading-snug text-white/70 transition hover:bg-white/5 hover:text-white"
+                        >
+                            {child.label}
+                            {isExternal(child.href) && (
+                                <span className="ml-1 opacity-40">↗</span>
+                            )}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default function Footer() {
     const { branding } = usePage().props;
-    const footerLogo = branding?.footer_logo || branding?.site_logo;
+    // const footerLogo = branding?.footer_logo || branding?.site_logo;
     const copyright =
         branding?.copyright ||
         '© 2026 The Adorable Savage Organization • Made with joy in Denver, CO';
@@ -31,7 +122,8 @@ export default function Footer() {
             <div className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
             <div className="relative z-10 mx-auto max-w-[1280px]">
-                <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr_1.2fr]">
+                <div className="grid gap-10 lg:grid-cols-[0.8fr_0.8fr_0.8fr_1.2fr]">
+                    {/* Left brand / logo / description — temporarily hidden
                     <div>
                         <div className="flex items-center gap-2 text-white">
                             {footerLogo ? (
@@ -57,16 +149,8 @@ export default function Footer() {
                             self-expression, sobriety, and authentic connection. Not
                             charity-chic — culture.
                         </p>
-                        <div className="mt-8">
-                            <a
-                                id="donate"
-                                href="/donate"
-                                className="inline-flex gap-2 rounded-full bg-white px-6 py-3 text-[12px] font-bold tracking-wide text-black transition hover:bg-[#FF6B9D] hover:text-white"
-                            >
-                                DONATE TODAY <span>♥</span>
-                            </a>
-                        </div>
                     </div>
+                    */}
 
                     <div>
                         <div className="mb-4 text-[12px] font-bold tracking-[0.2em] text-white">
@@ -86,8 +170,8 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <div className="mb-4 text-[12px] font-bold tracking-[0.2em] text-white">
-                            PROGRAMS
+                        <div className="mb-4 text-[12px] font-bold tracking-[0.2em] text-white uppercase">
+                        My People
                         </div>
                         <div className="space-y-2 text-[14px]">
                             {programLinks.map((name) => (
@@ -107,14 +191,11 @@ export default function Footer() {
                             CONNECT
                         </div>
                         <div className="space-y-2 text-[14px]">
-                            {socialLinks.map((label) => (
-                                <a
-                                    key={label}
-                                    href="#"
-                                    className="block transition hover:text-white"
-                                >
-                                    {label}
-                                </a>
+                            {socialLinks.map((link) => (
+                                <FooterSocialLink
+                                    key={link.label}
+                                    link={link}
+                                />
                             ))}
                         </div>
                     </div>
@@ -138,34 +219,22 @@ export default function Footer() {
                         <div className="mt-3 text-[11px] opacity-50">
                             No spam. Just vibes, events, and real notes from humans.
                         </div>
+
                         {/* <div className="mt-8 flex items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.04] p-3">
                             <div className="grid h-10 w-10 place-items-center rounded-full bg-[#FDE047] text-black">
                                 ♔
                             </div>
+
                             <div className="text-[12px] leading-tight">
                                 <div className="font-semibold text-white">
-                                    We’re a 501(c)(3) nonprofit
+                                    501(c)(3) Status Pending
                                 </div>
+
                                 <div className="opacity-60">
-                                    EIN: 84-123456 • All donations tax-deductible
+                                    Tax-exempt status application pending.
                                 </div>
                             </div>
                         </div> */}
-                       <div className="mt-8 flex items-center gap-3 rounded-[16px] border border-white/10 bg-white/[0.04] p-3">
-    <div className="grid h-10 w-10 place-items-center rounded-full bg-[#FDE047] text-black">
-        ♔
-    </div>
-
-    <div className="text-[12px] leading-tight">
-        <div className="font-semibold text-white">
-            501(c)(3) Status Pending
-        </div>
-
-        <div className="opacity-60">
-            Tax-exempt status application pending.
-        </div>
-    </div>
-</div>
                     </div>
                 </div>
 

@@ -30,6 +30,8 @@ export const navLinks = [
     },
     { label: 'Blog', href: '/blog' },
     { label: 'Merch', href: '#' },
+    { label: 'Community', href: '#' },
+
 ];
 
 export function sectionHref(labelOrLink) {

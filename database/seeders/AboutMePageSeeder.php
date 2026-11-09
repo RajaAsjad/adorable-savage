@@ -25,9 +25,18 @@ class AboutMePageSeeder extends Seeder
             'seo_title' => 'About Me — The Adorable Savage',
             'seo_description' => 'Cute is given. Adorable is earned. Meet Lyann Noe — The Adorable Savage. Soft enough to feel it all. Savage enough to keep going.',
             'ticker_text' => "CUTE IS GIVEN.\nADORABLE IS EARNED.\nSOFT ON PURPOSE.\nSAVAGE ENOUGH TO RISE.\nBOTH. ALWAYS.",
-            // Intro under tagline (doc para after "Cute is given…")
+            // Intro under tagline — opening question + body + signature + CTA
             'description' => <<<'HTML'
-<p>A puppy is cute. A baby is cute. But a woman who survived abuse, did the therapy, and stayed in recovery for 25 years, and still chose to stay soft, still feels everything, still loves? That's not cute. That's Adorable. It's cute that's been through the fire and came out tender on purpose.</p>
+<h2>What part of you has been waiting to be seen?</h2>
+<p>I'm not here to tell you healing is pretty.</p>
+<p>I survived abuse. I did the therapy. I'm now in my 25th year of recovery. It was raw, messy, and worth every second. And I'm still soft.</p>
+<p>A puppy is cute. A baby is cute. But a survivor who stayed tender, who still feels everything and still loves?</p>
+<p class="intro-signature"><strong>That's not cute. That's Adorable.</strong></p>
+<p>And it took a Savage to get here.</p>
+<p>I'm The Adorable Savage, and I'm living proof that you can walk through the fire and stay tender on purpose.</p>
+<p>So let me ask you:</p>
+<p><strong>What truth about yourself are you ready to say out loud?</strong></p>
+<p class="intro-cta"><a href="#meet-section">Come on in. Let's get real.</a></p>
 HTML,
             'custom_fields' => [
                 ['name' => 'eyebrow', 'value' => 'ABOUT ME'],

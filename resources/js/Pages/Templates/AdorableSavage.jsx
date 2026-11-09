@@ -215,16 +215,16 @@ export default function AdorableSavage({ page }) {
                         )}
 
                         {introHtml && (
-                            <Prose
-                                html={introHtml}
-                                className="mx-auto mt-6 max-w-2xl text-left sm:text-center"
+                            <div
+                                className="about-intro mx-auto mt-10 max-w-2xl text-center"
+                                dangerouslySetInnerHTML={{ __html: introHtml }}
                             />
                         )}
                     </div>
 
                     {/* Meet */}
                     {(meetHeading || meetHtml) && (
-                        <div className="mt-14 lg:mt-16">
+                        <div id="meet-section" className="mt-14 scroll-mt-28 lg:mt-16">
                             <SectionCard
                                 heading={meetHeading}
                                 html={meetHtml}

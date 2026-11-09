@@ -175,11 +175,13 @@ export default function PageForm({
                         {data.page_template === 'adorable-savage' && (
                             <p className="mt-1 text-[13px] text-black/45">
                                 Page Title is the centered heading. This editor
-                                is the intro under the tagline. Custom Fields:
-                                eyebrow, tagline, meet_heading, meet_body,
-                                pull_quote, origin_heading, origin_body,
-                                today_heading, today_body. No featured image
-                                needed.
+                                is the intro under the tagline: use H2 for the
+                                opening question, a paragraph with class
+                                intro-signature for &quot;That&apos;s not cute…&quot;,
+                                and intro-cta with a link for the button. Custom
+                                Fields: eyebrow, tagline, meet_heading,
+                                meet_body, pull_quote, origin_heading,
+                                origin_body, today_heading, today_body.
                             </p>
                         )}
                         <div className="mt-2 overflow-hidden rounded-2xl border border-black/10 bg-cream">
