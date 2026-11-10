@@ -22,17 +22,20 @@ function stripHtml(html) {
 }
 
 function EventsTitle({ title }) {
-    const text = title || 'COME FIND US IRL';
+    const text = title || 'COME FIND ME IRL';
 
-    if (!/\bUS\b/.test(text)) {
+    if (!/\b(ME|US)\b/.test(text)) {
         return text;
     }
 
-    const parts = text.split(/(\bUS\b)/);
+    const parts = text.split(/(\b(?:ME|US)\b)/);
 
     return parts.map((part, index) =>
-        part === 'US' ? (
-            <span key={index} className="font-hand text-[#FF6B9D]">
+        part === 'ME' || part === 'US' ? (
+            <span
+                key={index}
+                className="font-hand italic text-[#FF6B9D]"
+            >
                 {part}
             </span>
         ) : (
@@ -138,7 +141,7 @@ export default function Events({
             <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
-                        — I'll  BE
+                    WHERE I’LL BE
                     </div>
                     <h2 className="font-display text-[56px] leading-[0.9] tracking-tight lg:text-[72px]">
                         <EventsTitle title={title} />
