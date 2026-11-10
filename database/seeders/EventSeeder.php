@@ -39,8 +39,8 @@ class EventSeeder extends Seeder
                 'status' => Event::STATUS_PUBLISHED,
             ],
             [
-                'category_slug' => 'sobriety',
-                'title' => 'Sobriety Social: Game Night',
+                'category_slug' => 'community',
+                'title' => 'Community Social: Game Night',
                 'slug' => 'sobriety-social-game-night',
                 'event_date' => '2026-12-02',
                 'image_url' => '/images/4880405-pexels-photo-4880405.jpeg',

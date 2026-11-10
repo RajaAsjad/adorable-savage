@@ -154,11 +154,11 @@ export const events = [
         date: 'DEC 02',
         day: '02',
         month: 'DEC',
-        title: 'Sobriety Social: Game Night',
+        title: 'Community Social: Game Night',
         loc: 'Denver, CO • Community Lab',
-        cat: 'SOBRIETY',
+        cat: 'COMMUNITY',
         desc: 'Laughter is the best medicine, but we have snacks too.',
-        color: 'bg-[#FB7185]',
+        color: 'bg-[#2DD4BF]',
     },
     {
         date: 'DEC 07',
@@ -174,10 +174,9 @@ export const events = [
 
 export const eventFilters = [
     'ALL',
-    'WELLNESS',
     'MUSIC',
+    'WELLNESS',
     'COMMUNITY',
-    'SOBRIETY',
     'EDUCATION',
 ];
 

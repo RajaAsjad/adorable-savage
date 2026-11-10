@@ -28,6 +28,7 @@ export default function AdminLayout({ title, children }) {
     );
     const [eventsOpen, setEventsOpen] = useState(
         route().current('admin.event-categories.*') ||
+            route().current('admin.event-category-posts.*') ||
             route().current('admin.events.*'),
     );
     const [galleryOpen, setGalleryOpen] = useState(
@@ -40,6 +41,9 @@ export default function AdminLayout({ title, children }) {
     );
     const programPostsActive = route().current('admin.program-posts.*');
     const eventCategoriesActive = route().current('admin.event-categories.*');
+    const eventCategoryPostsActive = route().current(
+        'admin.event-category-posts.*',
+    );
     const eventsActive = route().current('admin.events.*');
     const galleryCategoriesActive = route().current(
         'admin.gallery-categories.*',
@@ -175,7 +179,9 @@ export default function AdminLayout({ title, children }) {
                             type="button"
                             onClick={() => setEventsOpen((open) => !open)}
                             className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-semibold tracking-wide transition ${
-                                eventCategoriesActive || eventsActive
+                                eventCategoriesActive ||
+                                eventCategoryPostsActive ||
+                                eventsActive
                                     ? 'bg-white/10 text-white'
                                     : 'text-white/70 hover:bg-white/5 hover:text-white'
                             }`}
@@ -206,6 +212,16 @@ export default function AdminLayout({ title, children }) {
                                     }`}
                                 >
                                     Event Category
+                                </Link>
+                                <Link
+                                    href={route('admin.event-category-posts.index')}
+                                    className={`block rounded-xl px-3 py-2 text-[12px] font-medium transition ${
+                                        eventCategoryPostsActive
+                                            ? 'bg-blush text-white'
+                                            : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    }`}
+                                >
+                                    Category Posts
                                 </Link>
                                 <Link
                                     href={route('admin.events.index')}

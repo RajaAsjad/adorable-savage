@@ -12,32 +12,30 @@ class EventCategorySeeder extends Seeder
         $categories = [
             [
                 'title' => 'MUSIC',
+                'heading' => 'Music Highlights',
                 'slug' => 'music',
-                'description' => 'Music and performance events.',
+                'description' => 'Music highlights, local venues, upcoming shows, and announcements.',
                 'status' => EventCategory::STATUS_PUBLISHED,
             ],
             [
                 'title' => 'WELLNESS',
+                'heading' => 'Wellness',
                 'slug' => 'wellness',
-                'description' => 'Wellness circles and practices.',
-                'status' => EventCategory::STATUS_PUBLISHED,
-            ],
-            [
-                'title' => 'EDUCATION',
-                'slug' => 'education',
-                'description' => 'Workshops and learning experiences.',
-                'status' => EventCategory::STATUS_PUBLISHED,
-            ],
-            [
-                'title' => 'SOBRIETY',
-                'slug' => 'sobriety',
-                'description' => 'Sober socials and support gatherings.',
+                'description' => 'Wellness-related information, updates, and announcements.',
                 'status' => EventCategory::STATUS_PUBLISHED,
             ],
             [
                 'title' => 'COMMUNITY',
+                'heading' => 'Community',
                 'slug' => 'community',
-                'description' => 'Community markets and shared experiences.',
+                'description' => 'Community activities, updates, and announcements.',
+                'status' => EventCategory::STATUS_PUBLISHED,
+            ],
+            [
+                'title' => 'EDUCATION',
+                'heading' => 'Education',
+                'slug' => 'education',
+                'description' => 'Educational information, resources, updates, and announcements.',
                 'status' => EventCategory::STATUS_PUBLISHED,
             ],
         ];
@@ -48,5 +46,9 @@ class EventCategorySeeder extends Seeder
                 $attributes
             );
         }
+
+        EventCategory::query()
+            ->where('slug', 'sobriety')
+            ->update(['status' => EventCategory::STATUS_DRAFT]);
     }
 }

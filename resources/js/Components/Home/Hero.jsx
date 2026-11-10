@@ -1,12 +1,11 @@
 import { images } from '@/data';
 
 export const defaultHeroLeftHtml = `
-<p><strong>WELLNESS • EXPRESSION • CONNECTION • JOY</strong></p>
-<h2>FIND YOUR</h2>
-<h2><em>Adorable</em></h2>
-<h2>SAVAGE — WITHIN.</h2>
-<p>Welcome to The Adorable Savage — a culture of wellness, music, and community.</p>
-<p><a href="#programs">EXPLORE OUR PROGRAMS</a> <a href="#philosophy">FIND YOUR SAVAGE</a></p>
+<h2>Feel deeply. Rise gently.</h2>
+<h2><em>Adorable heart. Savage strength.</em></h2>
+<p><strong>Welcome</strong></p>
+<p>Come as you are. You are welcome here.</p>
+<p>This is a space for honest stories, meaningful music, healing, hope, and the courage to keep moving forward. Here, a tender heart and fierce strength can live side by side.</p>
 `;
 
 function hasContent(html) {
@@ -38,7 +37,7 @@ export default function Hero({ playing, page = null }) {
                         dangerouslySetInnerHTML={{ __html: leftHtml }}
                     />
 
-                    <div className="mt-12 flex items-center gap-6">
+                    {/* <div className="mt-12 flex items-center gap-6">
                         <div className="flex -space-x-3">
                             {avatars.map((src) => (
                                 <img
@@ -55,7 +54,7 @@ export default function Hero({ playing, page = null }) {
                         <p className="max-w-[180px] text-[13px] leading-tight text-black/60">
                             Join 2,400+ humans finding their adorable savage daily.
                         </p>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="relative flex items-center justify-center lg:h-[760px]">
@@ -82,34 +81,9 @@ export default function Hero({ playing, page = null }) {
                         <img
                             src={heroImage}
                             alt={page?.title || 'Joyful authentic expression'}
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-contain"
                         />
-                        <div className="absolute inset-0 rounded-[2.2rem] ring-[1px] ring-inset ring-black/10" />
-                        <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-[18px] bg-white/90 p-4 shadow-lg backdrop-blur">
-                            <div className="grid h-10 w-10 place-items-center rounded-full bg-black text-white">
-                                ▶
-                            </div>
-                            <div>
-                                <div className="text-[11px] font-bold tracking-widest opacity-60">
-                                    NOW PLAYING
-                                </div>
-                                <div className="text-[13px] font-semibold leading-tight">
-                                    Verses & Vibes — Episode 24
-                                </div>
-                            </div>
-                            <div className="ml-auto flex h-6 items-end gap-[3px]">
-                                {Array.from({ length: 12 }).map((_, index) => (
-                                    <div
-                                        key={index}
-                                        className="wave-bar w-[3px] rounded-full bg-[#FF6B9D]"
-                                        style={{
-                                            animationDelay: `${index * 0.08}s`,
-                                            height: playing ? undefined : '8px',
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                        <div className="pointer-events-none absolute inset-0 rounded-[2.2rem] ring-[1px] ring-inset ring-black/10" />
                     </div>
 
                     <svg

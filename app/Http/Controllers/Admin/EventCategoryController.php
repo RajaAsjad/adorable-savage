@@ -53,6 +53,7 @@ class EventCategoryController extends Controller
             'category' => [
                 'id' => $eventCategory->id,
                 'title' => $eventCategory->title,
+                'heading' => $eventCategory->heading,
                 'slug' => $eventCategory->slug,
                 'image_url' => $eventCategory->image_url,
                 'description' => $eventCategory->description,

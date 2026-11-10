@@ -65,6 +65,7 @@ class EventCategoryService
     {
         return [
             'title' => $data['title'],
+            'heading' => $data['heading'] ?? null,
             'description' => $data['description'] ?? null,
             'status' => $data['status'],
             'seo_title' => $data['seo_title'] ?? null,

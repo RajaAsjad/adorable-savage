@@ -101,6 +101,7 @@ class EventController extends Controller
     private function categoryOptions(): array
     {
         return EventCategory::query()
+            ->whereIn('slug', ['music', 'wellness', 'community', 'education'])
             ->orderBy('title')
             ->get(['id', 'title'])
             ->map(fn (EventCategory $category) => [

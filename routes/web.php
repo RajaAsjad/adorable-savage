@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailSettingController;
 use App\Http\Controllers\Admin\EventCategoryController;
+use App\Http\Controllers\Admin\EventCategoryPostController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\CalendarCategoryController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
@@ -45,6 +47,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('program-categories', ProgramCategoryController::class)->except(['show']);
     Route::resource('program-posts', ProgramPostController::class)->except(['show']);
     Route::resource('event-categories', EventCategoryController::class)->except(['show']);
+    Route::resource('event-category-posts', EventCategoryPostController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);
     Route::resource('gallery-categories', GalleryCategoryController::class)->except(['show']);
     Route::resource('galleries', GalleryController::class)->except(['show']);
@@ -66,6 +69,10 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/calendar/{slug}', [CalendarCategoryController::class, 'show'])
+    ->where('slug', 'music|wellness|community|education')
+    ->name('calendar.show');
+
 Route::get('/{slug}', [PageController::class, 'show'])
-    ->where('slug', '^(?!admin$|dashboard$|profile$|login$|register$|forgot-password$|reset-password$|verify-email$|confirm-password$|up$|pillars$|blog$).+')
+    ->where('slug', '^(?!admin$|dashboard$|profile$|login$|register$|forgot-password$|reset-password$|verify-email$|confirm-password$|up$|pillars$|blog$|calendar$).+')
     ->name('pages.show');

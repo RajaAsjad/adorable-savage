@@ -10,12 +10,11 @@ class PageSeeder extends Seeder
     public function run(): void
     {
         $homeDescription = <<<'HTML'
-<p><strong>WELLNESS • EXPRESSION • CONNECTION • JOY</strong></p>
-<h2>FIND YOUR</h2>
-<h2><em>Adorable</em></h2>
-<h2>SAVAGE — WITHIN.</h2>
-<p>Welcome to The Adorable Savage — a culture of wellness, music, and community.</p>
-<p><a href="#programs">EXPLORE OUR PROGRAMS</a> <a href="#philosophy">FIND YOUR SAVAGE</a></p>
+<h2>Feel deeply. Rise gently.</h2>
+<h2><em>Adorable heart. Savage strength.</em></h2>
+<p><strong>Welcome</strong></p>
+<p>Come as you are. You are welcome here.</p>
+<p>This is a space for honest stories, meaningful music, healing, hope, and the courage to keep moving forward. Here, a tender heart and fierce strength can live side by side.</p>
 HTML;
 
         $aboutDescription = <<<'HTML'

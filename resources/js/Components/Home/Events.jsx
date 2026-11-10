@@ -1,5 +1,13 @@
 import { useState } from 'react';
+import { Link } from '@inertiajs/react';
 import { eventFilters, events } from '@/data';
+
+const CATEGORY_COLORS = {
+    MUSIC: 'bg-[#FF6B9D]',
+    WELLNESS: 'bg-[#A78BFA]',
+    EDUCATION: 'bg-[#FACC15]',
+    COMMUNITY: 'bg-[#2DD4BF]',
+};
 
 function stripHtml(html) {
     if (!html) {
@@ -45,34 +53,60 @@ function getCustomField(page, name, defaultValue = '') {
     return field?.value ?? defaultValue;
 }
 
-function resolveFilters(eventCategories) {
+function normalizeFilters(eventCategories) {
     if (Array.isArray(eventCategories) && eventCategories.length > 0) {
-        return ['ALL', ...eventCategories];
+        const mapped = eventCategories.map((item) => {
+            if (typeof item === 'string') {
+                return {
+                    title: item,
+                    slug: String(item).toLowerCase(),
+                };
+            }
+
+            return {
+                title: item.title,
+                slug: item.slug,
+            };
+        });
+
+        return [{ title: 'ALL', slug: null }, ...mapped];
     }
 
-    return eventFilters;
+    return eventFilters.map((title) => ({
+        title,
+        slug: title === 'ALL' ? null : String(title).toLowerCase(),
+    }));
 }
 
 function resolveEvents(eventsList) {
     if (Array.isArray(eventsList) && eventsList.length > 0) {
         return eventsList.map((event, index) => {
-            const fallback = events[index] || events[0];
+            const fallback =
+                events.find((item) => item.title === event.title) ||
+                events[index] ||
+                events[0];
+            const cat = (event.category_title || fallback.cat || '').toUpperCase();
 
             return {
                 title: event.title,
-                cat: event.category_title || fallback.cat,
-                loc: fallback.loc,
+                cat,
+                slug: event.category_slug || String(cat).toLowerCase(),
+                loc: fallback.loc || '',
                 desc: stripHtml(event.description) || fallback.desc,
                 day: event.day || fallback.day,
                 month: event.month
                     ? String(event.month).toUpperCase()
                     : fallback.month,
-                color: fallback.color,
+                color: CATEGORY_COLORS[cat] || fallback.color || 'bg-[#FF6B9D]',
             };
         });
     }
 
-    return events;
+    return events.map((event) => ({
+        ...event,
+        slug: String(event.cat || '').toLowerCase(),
+        color: CATEGORY_COLORS[event.cat] || event.color,
+    }));
 }
 
 export default function Events({
@@ -81,7 +115,7 @@ export default function Events({
     eventsList = [],
 }) {
     const [filter, setFilter] = useState('ALL');
-    const filters = resolveFilters(eventCategories);
+    const filters = normalizeFilters(eventCategories);
     const items = resolveEvents(eventsList);
     const visible =
         filter === 'ALL'
@@ -113,35 +147,54 @@ export default function Events({
                         {intro}
                     </p>
                 </div>
-                <a
-                    href="#events"
+                <Link
+                    href="/#events"
                     className="hidden rounded-full border border-black px-6 py-3 text-[12px] font-bold tracking-wide transition hover:bg-black hover:text-white md:inline-flex"
                 >
                     VIEW ALL EVENTS →
-                </a>
+                </Link>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
-                {filters.map((item) => (
-                    <button
-                        key={item}
-                        type="button"
-                        onClick={() => setFilter(item)}
-                        className={`rounded-full border px-5 py-2 text-[12px] font-bold tracking-wide transition ${
-                            filter === item
-                                ? 'border-black bg-black text-white'
-                                : 'border-black/10 bg-white hover:border-black'
-                        }`}
-                    >
-                        {item}
-                    </button>
-                ))}
+                {filters.map((item) => {
+                    if (item.slug) {
+                        return (
+                            <Link
+                                key={item.title}
+                                href={route('calendar.show', item.slug)}
+                                className={`rounded-full border px-5 py-2 text-[12px] font-bold tracking-wide transition ${
+                                    filter === item.title
+                                        ? 'border-black bg-black text-white'
+                                        : 'border-black/10 bg-white hover:border-black'
+                                }`}
+                            >
+                                {item.title}
+                            </Link>
+                        );
+                    }
+
+                    return (
+                        <button
+                            key={item.title}
+                            type="button"
+                            onClick={() => setFilter(item.title)}
+                            className={`rounded-full border px-5 py-2 text-[12px] font-bold tracking-wide transition ${
+                                filter === item.title
+                                    ? 'border-black bg-black text-white'
+                                    : 'border-black/10 bg-white hover:border-black'
+                            }`}
+                        >
+                            {item.title}
+                        </button>
+                    );
+                })}
             </div>
 
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {visible.map((event) => (
-                    <div
+                    <Link
                         key={event.title}
+                        href={route('calendar.show', event.slug)}
                         className="group flex gap-4 rounded-[22px] border border-black/10 bg-white p-5 transition hover:-translate-y-1 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.25)]"
                     >
                         <div
@@ -179,7 +232,7 @@ export default function Events({
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>

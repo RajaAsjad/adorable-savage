@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
-import About from '@/Components/Home/About';
+// import About from '@/Components/Home/About';
 // import Community from '@/Components/Home/Community';
-import CtaBanner from '@/Components/Home/CtaBanner';
+// import CtaBanner from '@/Components/Home/CtaBanner';
 import Events from '@/Components/Home/Events';
 import Footer from '@/Components/Home/Footer';
 import Header from '@/Components/Home/Header';
@@ -10,10 +10,10 @@ import Hero from '@/Components/Home/Hero';
 import HeroTicker from '@/Components/Home/HeroTicker';
 import Manifesto from '@/Components/Home/Manifesto';
 import Philosophy from '@/Components/Home/Philosophy';
-import Programs from '@/Components/Home/Programs';
+// import Programs from '@/Components/Home/Programs';
 import Social from '@/Components/Home/Social';
-import VersesVibes from '@/Components/Home/VersesVibes';
-import Wellness from '@/Components/Home/Wellness';
+// import VersesVibes from '@/Components/Home/VersesVibes';
+// import Wellness from '@/Components/Home/Wellness';
 
 export default function Home({
     page,
@@ -65,11 +65,11 @@ export default function Home({
             />
             <Hero playing={playing} page={page} />
             <HeroTicker tickerText={page?.ticker_text} />
-            <About page={aboutPage} aboutPosts={aboutPosts} />
+            {/* <About page={aboutPage} aboutPosts={aboutPosts} /> */}
             <Philosophy />
-            <Programs page={programsPage} programPosts={programPosts} />
-            <Wellness />
-            <VersesVibes playing={playing} setPlaying={setPlaying} />
+            {/* <Programs page={programsPage} programPosts={programPosts} /> */}
+            {/* <Wellness /> */}
+            {/* <VersesVibes playing={playing} setPlaying={setPlaying} /> */}
             <Events
                 page={eventsPage}
                 eventCategories={eventCategories}
@@ -78,7 +78,7 @@ export default function Home({
             {/* <Community /> */}
             <Manifesto />
             <Social page={stayVibePage} galleryItems={galleryItems} />
-            <CtaBanner />
+            {/* <CtaBanner /> */}
             <Footer />
         </div>
     );

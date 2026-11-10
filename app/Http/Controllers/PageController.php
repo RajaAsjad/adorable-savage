@@ -170,14 +170,22 @@ class PageController extends Controller
     }
 
     /**
-     * @return list<string>
+     * @return list<array{title: string, slug: string}>
      */
     private function eventCategoriesPayload(): array
     {
+        $order = ['music', 'wellness', 'community', 'education'];
+
         return EventCategory::query()
             ->published()
-            ->orderBy('title')
-            ->pluck('title')
+            ->whereIn('slug', $order)
+            ->get(['title', 'slug'])
+            ->sortBy(fn (EventCategory $category) => array_search($category->slug, $order, true))
+            ->values()
+            ->map(fn (EventCategory $category) => [
+                'title' => $category->title,
+                'slug' => $category->slug,
+            ])
             ->all();
     }
 
@@ -189,6 +197,14 @@ class PageController extends Controller
         return Event::query()
             ->published()
             ->with(['category' => fn ($query) => $query->published()])
+            ->whereHas('category', function ($query) {
+                $query->published()->whereIn('slug', [
+                    'music',
+                    'wellness',
+                    'community',
+                    'education',
+                ]);
+            })
             ->orderBy('event_date')
             ->orderBy('id')
             ->get()
@@ -203,6 +219,7 @@ class PageController extends Controller
                 'image_url' => $event->image_url,
                 'description' => $event->description,
                 'category_title' => $event->category?->title,
+                'category_slug' => $event->category?->slug,
             ])
             ->all();
     }

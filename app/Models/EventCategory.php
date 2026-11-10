@@ -21,6 +21,7 @@ class EventCategory extends Model
 
     protected $fillable = [
         'title',
+        'heading',
         'slug',
         'image_url',
         'description',
@@ -60,6 +61,16 @@ class EventCategory extends Model
     public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'event_category_id');
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(EventCategoryPost::class, 'event_category_id');
+    }
+
+    public function pageHeading(): string
+    {
+        return filled($this->heading) ? $this->heading : $this->title;
     }
 
     public function isPublished(): bool

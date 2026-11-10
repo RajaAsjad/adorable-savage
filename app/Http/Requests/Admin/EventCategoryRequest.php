@@ -20,6 +20,7 @@ class EventCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'heading' => ['nullable', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'max:2048'],
             'remove_image' => ['sometimes', 'boolean'],
             'description' => ['nullable', 'string'],

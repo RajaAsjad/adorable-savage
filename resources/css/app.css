@@ -211,13 +211,27 @@ html {
     );
 }
 
-.hero-copy > p:not(:first-child):not(:has(a)) {
-    margin: 2rem 0 0;
+.hero-copy > p:not(:first-child):not(:has(a)),
+.hero-copy > h1 + p:not(:has(a)),
+.hero-copy > h2 + p:not(:has(a)),
+.hero-copy > h3 + p:not(:has(a)) {
+    margin: 1.75rem 0 0;
     max-width: 460px;
     font-size: 17px;
     font-weight: 450;
     line-height: 1.55;
     color: rgba(0, 0, 0, 0.7);
+}
+
+.hero-copy > p + p:not(:has(a)) {
+    margin-top: 0.75rem;
+}
+
+.hero-copy > p strong {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: #131313;
+    letter-spacing: 0.02em;
 }
 
 .hero-copy > p:has(a) {

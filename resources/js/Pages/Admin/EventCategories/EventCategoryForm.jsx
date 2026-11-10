@@ -15,6 +15,7 @@ export default function EventCategoryForm({
 
     const { data, setData, post: submitForm, processing, errors } = useForm({
         title: category?.title || '',
+        heading: category?.heading || '',
         image: null,
         remove_image: false,
         description: category?.description || '',
@@ -56,6 +57,21 @@ export default function EventCategoryForm({
                             </span>
                         </p>
                     )}
+
+                    <div className="mt-6">
+                        <InputLabel htmlFor="heading" value="Page Heading" />
+                        <TextInput
+                            id="heading"
+                            className="mt-2 block w-full"
+                            value={data.heading}
+                            onChange={(e) => setData('heading', e.target.value)}
+                            placeholder="Music Highlights"
+                        />
+                        <p className="mt-2 text-[13px] text-black/45">
+                            Shown as the main heading on the public category page.
+                        </p>
+                        <InputError className="mt-2" message={errors.heading} />
+                    </div>
 
                     <div className="mt-8">
                         <InputLabel htmlFor="description" value="Description" />
