@@ -106,7 +106,7 @@ export default function TwoColumn({ page }) {
 
                         {content ? (
                             <div
-                                className="prose prose-neutral mt-8 max-w-none text-[16px] leading-7 text-black/75"
+                                className="cms-content mt-8 max-w-none"
                                 dangerouslySetInnerHTML={{ __html: content }}
                             />
                         ) : (

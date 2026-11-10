@@ -428,3 +428,158 @@ html {
 .about-intro > p.intro-cta a:hover {
     background: #ff6b9d;
 }
+
+/* CKEditor admin chrome */
+.cke {
+    width: 100% !important;
+}
+
+.cke_chrome {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.cke_top {
+    background: #f7f4ee !important;
+    border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.cke_bottom {
+    background: #f7f4ee !important;
+    border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Rich text from CKEditor — preserve editor formatting on the site */
+.cms-content {
+    color: #131313;
+    font-size: 16px;
+    line-height: 1.7;
+    word-wrap: break-word;
+}
+
+.cms-content > *:first-child {
+    margin-top: 0;
+}
+
+.cms-content > *:last-child {
+    margin-bottom: 0;
+}
+
+.cms-content p {
+    margin: 0 0 1em;
+}
+
+.cms-content h1,
+.cms-content h2,
+.cms-content h3,
+.cms-content h4,
+.cms-content h5,
+.cms-content h6 {
+    margin: 1.25em 0 0.5em;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #131313;
+}
+
+.cms-content h1 { font-size: 2.25em; }
+.cms-content h2 { font-size: 1.75em; }
+.cms-content h3 { font-size: 1.4em; }
+.cms-content h4 { font-size: 1.2em; }
+
+.cms-content ul,
+.cms-content ol {
+    margin: 0 0 1em;
+    padding-left: 1.5rem;
+}
+
+.cms-content ul { list-style: disc; }
+.cms-content ol { list-style: decimal; }
+.cms-content li { margin: 0.35em 0; }
+
+.cms-content blockquote {
+    margin: 1em 0;
+    padding: 0.5rem 0 0.5rem 1rem;
+    border-left: 4px solid #ff6b9d;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.cms-content a {
+    color: #ff6b9d;
+    text-decoration: underline;
+}
+
+.cms-content img,
+.cms-content video,
+.cms-content iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+.cms-content iframe {
+    display: block;
+    width: 100%;
+    min-height: 280px;
+    border: 0;
+}
+
+.cms-content table {
+    width: 100%;
+    margin: 1em 0;
+    border-collapse: collapse;
+}
+
+.cms-content table td,
+.cms-content table th {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0.75rem;
+    vertical-align: top;
+}
+
+.cms-content table th {
+    background: rgba(0, 0, 0, 0.04);
+    font-weight: 700;
+}
+
+.cms-content hr {
+    margin: 1.5em 0;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.cms-content pre,
+.cms-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.cms-content pre {
+    overflow-x: auto;
+    margin: 1em 0;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.cms-content .marker,
+.cms-content mark {
+    background: #fde047;
+    padding: 0 0.15em;
+}
+
+/* Keep CKEditor inline styles (color, size, align, font) intact */
+.cms-content [style] {
+    /* Inline style attribute wins over class rules by specificity. */
+}
+
+.cms-content span[style*="font-size"],
+.cms-content span[style*="color"],
+.cms-content span[style*="background"],
+.cms-content p[style*="text-align"],
+.cms-content div[style*="text-align"],
+.cms-content h1[style],
+.cms-content h2[style],
+.cms-content h3[style],
+.cms-content h4[style] {
+    /* Intentionally unstyled — browser applies the inline styles. */
+}

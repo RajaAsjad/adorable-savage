@@ -57,7 +57,7 @@ export default function PageForm({
 
                     <div className="mt-6">
                         <InputLabel htmlFor="description" value="Description" />
-                        <div className="mt-2 overflow-hidden rounded-[22px] border border-black/10 bg-cream">
+                        <div className="mt-2 overflow-visible rounded-[22px] border border-black/10 bg-cream">
                             <SimpleEditor
                                 id="description"
                                 value={data.description}

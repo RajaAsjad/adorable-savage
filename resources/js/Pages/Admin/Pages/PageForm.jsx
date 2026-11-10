@@ -184,7 +184,7 @@ export default function PageForm({
                                 origin_body, today_heading, today_body.
                             </p>
                         )}
-                        <div className="mt-2 overflow-hidden rounded-2xl border border-black/10 bg-cream">
+                        <div className="mt-2 overflow-visible rounded-2xl border border-black/10 bg-cream">
                             <SimpleEditor
                                 id="description"
                                 value={data.description}

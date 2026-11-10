@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import Footer from '@/Components/Home/Footer';
 import Header from '@/Components/Home/Header';
+import PhilosophyMarquee from '@/Components/Home/PhilosophyMarquee';
 
 function stripHtml(html) {
     if (!html) {
@@ -140,6 +141,8 @@ export default function CalendarCategory({
             />
 
             <main className="relative pt-24">
+                <PhilosophyMarquee />
+
                 <section className="relative mx-auto max-w-[1280px] px-6 pb-10 pt-12 lg:pt-16">
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
                         — CALENDAR
@@ -210,7 +213,7 @@ export default function CalendarCategory({
                                         </h3>
                                         {post.description ? (
                                             <div
-                                                className="prose prose-neutral mt-4 max-w-none text-[15px] leading-[1.65] text-black/65"
+                                                className="cms-content mt-4 max-w-none text-[15px]"
                                                 dangerouslySetInnerHTML={{
                                                     __html: post.description,
                                                 }}

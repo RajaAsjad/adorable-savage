@@ -66,7 +66,7 @@ function Prose({ html, className = '' }) {
 
     return (
         <div
-            className={`prose prose-neutral max-w-none text-[16px] leading-[1.75] text-black/70 prose-p:my-4 prose-p:first:mt-0 prose-strong:font-bold prose-strong:text-ink ${className}`}
+            className={`cms-content max-w-none ${className}`}
             dangerouslySetInnerHTML={{ __html: html }}
         />
     );

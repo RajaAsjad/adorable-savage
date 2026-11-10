@@ -138,7 +138,7 @@ export default function Events({
             <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
                     <div className="mb-4 text-[12px] font-bold tracking-[0.2em] opacity-60">
-                        — WHERE WE'LL BE
+                        — I'll  BE
                     </div>
                     <h2 className="font-display text-[56px] leading-[0.9] tracking-tight lg:text-[72px]">
                         <EventsTitle title={title} />
@@ -147,12 +147,12 @@ export default function Events({
                         {intro}
                     </p>
                 </div>
-                <Link
+                {/* <Link
                     href="/#events"
                     className="hidden rounded-full border border-black px-6 py-3 text-[12px] font-bold tracking-wide transition hover:bg-black hover:text-white md:inline-flex"
                 >
                     VIEW ALL EVENTS →
-                </Link>
+                </Link> */}
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">

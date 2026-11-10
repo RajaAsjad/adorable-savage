@@ -109,7 +109,7 @@ export default function EventCategoryPostForm({
 
                     <div className="mt-8">
                         <InputLabel htmlFor="description" value="Description" />
-                        <div className="mt-2 overflow-hidden rounded-2xl border border-black/10 bg-cream">
+                        <div className="mt-2 overflow-visible rounded-2xl border border-black/10 bg-cream">
                             <SimpleEditor
                                 id="description"
                                 value={data.description}

@@ -337,7 +337,7 @@ export default function GetInvolved({ page }) {
 
                             {page?.description ? (
                                 <div
-                                    className="prose prose-neutral mt-7 max-w-2xl text-[17px] leading-[1.7] text-black/70"
+                                    className="cms-content mt-7 max-w-2xl text-[17px]"
                                     dangerouslySetInnerHTML={{
                                         __html: page.description,
                                     }}

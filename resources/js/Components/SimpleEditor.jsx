@@ -1,32 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
-const JQUERY_SRC = 'https://code.jquery.com/jquery-3.7.1.min.js';
-const SUMMERNOTE_CSS =
-    'https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css';
-const SUMMERNOTE_SRC =
-    'https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js';
-
-function loadStylesheet(href) {
-    if (document.querySelector(`link[href="${href}"]`)) {
-        return;
-    }
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    document.head.appendChild(link);
-}
+const CKEDITOR_SRC = 'https://cdn.ckeditor.com/4.22.1/full/ckeditor.js';
 
 function loadScript(src) {
     return new Promise((resolve, reject) => {
         const existing = document.querySelector(`script[src="${src}"]`);
         if (existing) {
-            if (existing.dataset.loaded === 'true') {
+            if (window.CKEDITOR || existing.dataset.loaded === 'true') {
                 resolve();
                 return;
             }
             existing.addEventListener('load', () => resolve(), { once: true });
-            existing.addEventListener('error', () => reject(), { once: true });
+            existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), {
+                once: true,
+            });
             return;
         }
 
@@ -37,19 +24,39 @@ function loadScript(src) {
             script.dataset.loaded = 'true';
             resolve();
         });
-        script.addEventListener('error', reject);
+        script.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)));
         document.body.appendChild(script);
     });
 }
 
+function csrfToken() {
+    return (
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute('content') || ''
+    );
+}
+
+function uploadUrl() {
+    const token = csrfToken();
+    const base =
+        typeof route === 'function'
+            ? route('admin.editor.upload')
+            : '/admin/editor/upload';
+
+    return token ? `${base}?_token=${encodeURIComponent(token)}` : base;
+}
+
 export default function SimpleEditor({
-    id = 'description',
+    id,
     value = '',
     onChange,
 }) {
+    const autoId = useId().replace(/:/g, '');
+    const editorId = id || `ckeditor-${autoId}`;
     const textareaRef = useRef(null);
     const onChangeRef = useRef(onChange);
-    const initializedRef = useRef(false);
+    const instanceNameRef = useRef(null);
 
     onChangeRef.current = onChange;
 
@@ -57,62 +64,111 @@ export default function SimpleEditor({
         let cancelled = false;
 
         const init = async () => {
-            loadStylesheet(SUMMERNOTE_CSS);
-            await loadScript(JQUERY_SRC);
-            await loadScript(SUMMERNOTE_SRC);
+            await loadScript(CKEDITOR_SRC);
 
-            if (cancelled || !textareaRef.current || !window.jQuery?.fn?.summernote) {
+            if (cancelled || !textareaRef.current || !window.CKEDITOR) {
                 return;
             }
 
-            const $el = window.jQuery(textareaRef.current);
+            window.CKEDITOR.config.versionCheck = false;
 
-            $el.summernote({
-                placeholder: 'Write page content…',
-                height: 320,
-                disableDragAndDrop: true,
-                styleTags: ['p', 'h2', 'h3'],
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link']],
-                    ['view', ['codeview']],
-                ],
-                callbacks: {
-                    onChange(contents) {
-                        onChangeRef.current?.(contents);
-                    },
-                },
+            if (!window.__asCkEditorCssAdded) {
+                window.CKEDITOR.addCss(`
+                    body {
+                        font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+                        font-size: 15px;
+                        line-height: 1.65;
+                        color: #131313;
+                        background: #fff;
+                        margin: 16px;
+                    }
+                    img { max-width: 100%; height: auto; }
+                    table { width: 100%; border-collapse: collapse; }
+                    table td, table th { border: 1px solid #ccc; padding: 6px 10px; }
+                    blockquote {
+                        border-left: 4px solid #ff6b9d;
+                        margin: 1em 0;
+                        padding-left: 1rem;
+                        color: rgba(0, 0, 0, 0.7);
+                    }
+                `);
+                window.__asCkEditorCssAdded = true;
+            }
+
+            if (window.CKEDITOR.instances[editorId]) {
+                window.CKEDITOR.instances[editorId].destroy(true);
+            }
+
+            const endpoint = uploadUrl();
+            const token = csrfToken();
+
+            const editor = window.CKEDITOR.replace(textareaRef.current, {
+                height: 360,
+                allowedContent: true,
+                extraAllowedContent: '*(*);*{*}',
+                versionCheck: false,
+                removePlugins: 'exportpdf',
+                toolbarCanCollapse: false,
+                entities: false,
+                basicEntities: true,
+                fillEmptyBlocks: false,
+                forcePasteAsPlainText: false,
+                pasteFromWordRemoveFontStyles: false,
+                pasteFromWordRemoveStyles: false,
+                filebrowserUploadUrl: endpoint,
+                filebrowserImageUploadUrl: endpoint,
+                filebrowserUploadMethod: 'form',
+                uploadUrl: endpoint,
+                fileTools_requestHeaders: token
+                    ? {
+                          'X-CSRF-TOKEN': token,
+                          'X-Requested-With': 'XMLHttpRequest',
+                      }
+                    : {
+                          'X-Requested-With': 'XMLHttpRequest',
+                      },
             });
 
-            $el.summernote('code', value || '');
-            initializedRef.current = true;
+            instanceNameRef.current = editor.name;
+
+            editor.on('instanceReady', () => {
+                if (cancelled) {
+                    return;
+                }
+                editor.setData(value || '');
+            });
+
+            editor.on('change', () => {
+                onChangeRef.current?.(editor.getData());
+            });
+
+            editor.on('blur', () => {
+                onChangeRef.current?.(editor.getData());
+            });
         };
 
-        init();
+        init().catch(() => {
+            // Keep textarea usable if CDN fails.
+        });
 
         return () => {
             cancelled = true;
-            if (
-                textareaRef.current &&
-                initializedRef.current &&
-                window.jQuery?.fn?.summernote
-            ) {
-                window.jQuery(textareaRef.current).summernote('destroy');
-                initializedRef.current = false;
+            const name = instanceNameRef.current || editorId;
+            if (window.CKEDITOR?.instances?.[name]) {
+                window.CKEDITOR.instances[name].destroy(true);
             }
+            instanceNameRef.current = null;
         };
-        // Initialize once per mount; value is applied inside init.
+        // Mount once; parent forms own the value thereafter.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [editorId]);
 
     return (
         <textarea
-            id={id}
+            id={editorId}
             ref={textareaRef}
             defaultValue={value}
-            className="block w-full"
+            className="block min-h-[220px] w-full rounded-2xl border border-black/10 bg-white p-4 text-[15px]"
         />
     );
 }

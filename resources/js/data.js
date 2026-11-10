@@ -13,7 +13,7 @@ export const images = {
 export const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
-    { label: 'COME FIND ME', href: '#' },
+    { label: 'COME FIND ME', href: '/calendar/music' },
     {
         label: 'YOUTUBE',
         href: '#',

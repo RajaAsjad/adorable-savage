@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutPostController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EditorUploadController;
 use App\Http\Controllers\Admin\EmailSettingController;
 use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\EventCategoryPostController;
@@ -36,6 +37,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/settings/email', [EmailSettingController::class, 'edit'])->name('settings.email');
     Route::post('/settings/email', [EmailSettingController::class, 'update'])->name('settings.email.update');
     Route::post('/settings/email/test', [EmailSettingController::class, 'test'])->name('settings.email.test');
+
+    Route::post('/editor/upload', [EditorUploadController::class, 'store'])
+        ->name('editor.upload');
 
     Route::resource('pages', AdminPageController::class)->except(['show']);
     Route::post('about-posts/{about_post}/move-up', [AboutPostController::class, 'moveUp'])

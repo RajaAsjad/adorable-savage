@@ -146,7 +146,7 @@ export default function Contact({ page }) {
 
                         {page?.description ? (
                             <div
-                                className="prose prose-neutral mt-6 max-w-xl text-[17px] leading-[1.65] text-black/70"
+                                className="cms-content mt-6 max-w-xl text-[17px]"
                                 dangerouslySetInnerHTML={{
                                     __html: page.description,
                                 }}

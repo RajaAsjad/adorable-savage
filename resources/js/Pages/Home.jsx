@@ -9,7 +9,7 @@ import Header from '@/Components/Home/Header';
 import Hero from '@/Components/Home/Hero';
 import HeroTicker from '@/Components/Home/HeroTicker';
 import Manifesto from '@/Components/Home/Manifesto';
-import Philosophy from '@/Components/Home/Philosophy';
+// import Philosophy from '@/Components/Home/Philosophy';
 // import Programs from '@/Components/Home/Programs';
 import Social from '@/Components/Home/Social';
 // import VersesVibes from '@/Components/Home/VersesVibes';
@@ -66,7 +66,7 @@ export default function Home({
             <Hero playing={playing} page={page} />
             <HeroTicker tickerText={page?.ticker_text} />
             {/* <About page={aboutPage} aboutPosts={aboutPosts} /> */}
-            <Philosophy />
+            {/* <Philosophy /> */}
             {/* <Programs page={programsPage} programPosts={programPosts} /> */}
             {/* <Wellness /> */}
             {/* <VersesVibes playing={playing} setPlaying={setPlaying} /> */}
