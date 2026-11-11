@@ -60,6 +60,8 @@ class PageTemplateService
             'contact' => 'Templates/Contact',
             'get-involved' => 'Templates/GetInvolved',
             'adorable-savage' => 'Templates/AdorableSavage',
+            'merch' => 'Templates/Merch',
+            'community' => 'Templates/Community',
             'two-column' => 'Templates/TwoColumn',
             'default' => 'Templates/Default',
         ];

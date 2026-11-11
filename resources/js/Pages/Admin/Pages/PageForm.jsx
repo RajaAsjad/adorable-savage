@@ -109,7 +109,13 @@ export default function PageForm({
                                                 : data.page_template ===
                                                     'adorable-savage'
                                                   ? 'The Concept (Left Column)'
-                                                  : 'Content'
+                                                  : data.page_template ===
+                                                      'merch'
+                                                    ? 'Merch Banner Intro'
+                                                    : data.page_template ===
+                                                        'community'
+                                                      ? 'Community Banner Intro'
+                                                      : 'Content'
                             }
                         />
                         {data.page_template === 'home' && (
@@ -170,6 +176,21 @@ export default function PageForm({
                                 Four cards use donate_, volunteer_, sponsor_,
                                 artists_ (_title, _text, _cta, _url) +
                                 donate_note. Also: eyebrow, closing.
+                            </p>
+                        )}
+                        {data.page_template === 'merch' && (
+                            <p className="mt-1 text-[13px] text-black/45">
+                                Page Title is the Merch banner heading. This
+                                editor is the short intro under &quot;Coming
+                                Soon&quot;. Featured image is optional for later
+                                product drops.
+                            </p>
+                        )}
+                        {data.page_template === 'community' && (
+                            <p className="mt-1 text-[13px] text-black/45">
+                                Page Title is the Community banner heading. This
+                                editor is the short intro under &quot;Coming
+                                Soon&quot;.
                             </p>
                         )}
                         {data.page_template === 'adorable-savage' && (

@@ -5,8 +5,9 @@ const exploreLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/the-adorable-savage' },
     { label: 'Come Find Me', href: '#' },
-    // { label: 'YOUTUBE', href: '#' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Merch', href: '/merch' },
+    { label: 'Community', href: '/community' },
 ];
 const programLinks = [
   

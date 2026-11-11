@@ -29,8 +29,8 @@ export const navLinks = [
         ],
     },
     { label: 'Blog', href: '/blog' },
-    { label: 'Merch', href: '#' },
-    { label: 'Community', href: '#' },
+    { label: 'Merch', href: '/merch' },
+    { label: 'Community', href: '/community' },
 
 ];
 
