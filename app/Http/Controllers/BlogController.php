@@ -22,7 +22,7 @@ class BlogController extends Controller
                     'id' => $blog->id,
                     'title' => $blog->title,
                     'slug' => $blog->slug,
-                    'excerpt' => $blog->excerpt,
+                    'snippet' => $blog->contentSnippet(),
                     'image_url' => $blog->image_url,
                     'published_at' => $blog->published_at?->format('M j, Y'),
                 ]),
@@ -42,12 +42,12 @@ class BlogController extends Controller
                 'id' => $blog->id,
                 'title' => $blog->title,
                 'slug' => $blog->slug,
-                'excerpt' => $blog->excerpt,
                 'image_url' => $blog->image_url,
                 'description' => $blog->description,
                 'published_at' => $blog->published_at?->format('M j, Y'),
                 'seo_title' => $blog->seo_title,
-                'seo_description' => $blog->seo_description,
+                'seo_description' => $blog->seo_description
+                    ?: $blog->contentSnippet(160),
             ],
         ]);
     }

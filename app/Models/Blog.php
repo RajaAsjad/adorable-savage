@@ -106,4 +106,19 @@ class Blog extends Model
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
     }
+
+    public function contentSnippet(int $limit = 160): ?string
+    {
+        $text = trim(preg_replace(
+            '/\s+/',
+            ' ',
+            html_entity_decode(strip_tags((string) $this->description), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+        ) ?? '');
+
+        if ($text === '') {
+            return null;
+        }
+
+        return Str::limit($text, $limit);
+    }
 }

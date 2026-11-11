@@ -20,7 +20,6 @@ class BlogRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'excerpt' => ['nullable', 'string', 'max:500'],
             'image' => ['nullable', 'image', 'max:2048'],
             'remove_image' => ['sometimes', 'boolean'],
             'description' => ['nullable', 'string'],
@@ -48,7 +47,6 @@ class BlogRequest extends FormRequest
         return [
             'title.required' => 'Please enter a title.',
             'title.max' => 'The title may not be longer than 255 characters.',
-            'excerpt.max' => 'The excerpt may not be longer than 500 characters.',
             'image.image' => 'The image must be a valid image file.',
             'image.max' => 'The image may not be larger than 2MB.',
             'status.required' => 'Please choose a status.',

@@ -80,9 +80,9 @@ export default function Index({ blogs }) {
                                     <h2 className="mt-2 font-display text-[26px] leading-[1.05]">
                                         {blog.title}
                                     </h2>
-                                    {blog.excerpt && (
+                                    {blog.snippet && (
                                         <p className="mt-3 line-clamp-3 text-[14px] leading-[1.5] text-black/60">
-                                            {blog.excerpt}
+                                            {blog.snippet}
                                         </p>
                                     )}
                                     <div className="mt-5 text-[12px] font-bold tracking-widest">

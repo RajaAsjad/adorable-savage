@@ -15,7 +15,6 @@ export default function BlogForm({
 
     const { data, setData, post: submitForm, processing, errors } = useForm({
         title: blog?.title || '',
-        excerpt: blog?.excerpt || '',
         image: null,
         remove_image: false,
         description: blog?.description || '',
@@ -62,19 +61,6 @@ export default function BlogForm({
                             </span>
                         </p>
                     )}
-
-                    <div className="mt-6">
-                        <InputLabel htmlFor="excerpt" value="Excerpt" />
-                        <textarea
-                            id="excerpt"
-                            rows={3}
-                            className="mt-2 block w-full rounded-3xl border-black/10 bg-cream shadow-sm focus:border-blush focus:ring-blush"
-                            value={data.excerpt}
-                            onChange={(e) => setData('excerpt', e.target.value)}
-                            placeholder="Short summary shown on the blog listing"
-                        />
-                        <InputError className="mt-2" message={errors.excerpt} />
-                    </div>
 
                     <div className="mt-8">
                         <InputLabel htmlFor="description" value="Content" />

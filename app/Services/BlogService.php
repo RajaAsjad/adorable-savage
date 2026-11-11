@@ -94,7 +94,6 @@ class BlogService
 
         $attributes = [
             'title' => $data['title'],
-            'excerpt' => $data['excerpt'] ?? null,
             'description' => $data['description'] ?? null,
             'status' => $status,
             'seo_title' => $data['seo_title'] ?? null,

@@ -20,10 +20,10 @@ export default function Show({ blog }) {
         <div className="relative min-h-screen overflow-x-hidden bg-[#FFFBF0] text-[#131313] selection:bg-[#FF6B9D] selection:text-white">
             <Head>
                 <title>{title}</title>
-                {(blog?.seo_description || blog?.excerpt) && (
+                {blog?.seo_description && (
                     <meta
                         name="description"
-                        content={blog.seo_description || blog.excerpt}
+                        content={blog.seo_description}
                     />
                 )}
             </Head>
@@ -57,12 +57,6 @@ export default function Show({ blog }) {
                 <h1 className="mt-3 font-display text-[42px] leading-none tracking-tight md:text-[56px]">
                     {blog?.title}
                 </h1>
-
-                {blog?.excerpt && (
-                    <p className="mt-5 text-[18px] leading-[1.55] text-black/55">
-                        {blog.excerpt}
-                    </p>
-                )}
 
                 {blog?.description ? (
                     <div
